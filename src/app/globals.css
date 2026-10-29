@@ -1151,18 +1151,6 @@ button {
   opacity: 0.4;
   mix-blend-mode: multiply;
 }
-.division-foto {
-  position: absolute;
-  left: clamp(20px, 3vw, 48px);
-  bottom: clamp(84px, 8vw, 110px);
-  font-family: var(--font-mono);
-  font-size: 10.5px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: #7a7468;
-  opacity: 0;
-  transition: opacity 0.5s ease 0.3s;
-}
 .division-grande {
   position: relative;
   display: flex;
@@ -1213,9 +1201,6 @@ button {
 @media (hover: hover) and (min-width: 760px) {
   .division-lado:hover .division-fondo {
     clip-path: inset(0 0 0 0);
-  }
-  .division-lado:hover .division-foto {
-    opacity: 1;
   }
   .division-lado:hover .division-grande {
     letter-spacing: 0.01em;

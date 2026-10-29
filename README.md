@@ -39,8 +39,9 @@ Las fotos de ambiente en `public/fotos/` son provisorias, de Pexels (licencia li
 | `cosmetica-envases.webp` | 34939748 |
 | `cosmetica-textura.webp` | 7256104 |
 | `mayorista-empaques.webp` | 5128083 |
+| `mayorista-volumen.webp` | 17260157 |
 
-Varias muestran marcas de terceros (Bentley, Victoria's Secret, Ivy Dubai, Novellista); conviene reemplazarlas por fotos propias del cliente antes de producción. Siguen sin foto "Mercadería por volumen", "Surtido por volumen", las de Nosotros y las de los productos.
+Varias muestran marcas de terceros (Bentley, Victoria's Secret, Ivy Dubai, Novellista); conviene reemplazarlas por fotos propias del cliente antes de producción. Siguen sin foto las de Nosotros y las de los productos.
 
 Para agregar una: `cwebp -q 78 -resize 1200 0 original.jpg -o public/fotos/nombre.webp` y pasarla como `src` al componente `Foto`.
 

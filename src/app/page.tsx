@@ -133,8 +133,9 @@ export default async function Inicio() {
             </span>
           </Link>
           <Link href="/mayoristas/" className="division-lado">
-            <span className="division-fondo" />
-            <span className="division-foto">Fotografía · mercadería por volumen</span>
+            <span className="division-fondo">
+              <img src="/fotos/mayorista-volumen.webp" alt="" className="foto-img" loading="lazy" />
+            </span>
             <span className="rotulo" style={{ position: 'relative', fontWeight: 600, letterSpacing: '.2em', color: 'var(--oro-oscuro)' }}>Compra mayorista</span>
             <span className="division-grande" style={{ fontStyle: 'italic' }}><span>POR</span><span>MAYOR</span></span>
             <span className="division-pie">
@@ -218,7 +219,7 @@ export default async function Inicio() {
         <div className="franja-fotos">
           <Foto texto="Mercadería en caja" src="/fotos/mayorista-empaques.webp" />
           <Foto texto="Empaques" src="/fotos/hero-packaging.webp" b />
-          <Foto texto="Surtido por volumen" />
+          <Foto texto="Surtido por volumen" src="/fotos/mayorista-volumen.webp" />
         </div>
         <div className="contenedor-angosto" style={{ padding: '0 var(--gutter)', display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(min(100%,440px),1fr))', gap: 'clamp(28px,5vw,80px)', alignItems: 'end' }}>
           <h2 className="serif" style={{ margin: 'clamp(-48px,-4vw,-24px) 0 0', position: 'relative', fontSize: 'clamp(42px,6vw,96px)', lineHeight: 0.95, letterSpacing: '-.02em', textTransform: 'uppercase', textWrap: 'balance' }}>
