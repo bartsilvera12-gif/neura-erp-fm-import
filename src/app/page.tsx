@@ -21,19 +21,19 @@ export default async function Inicio() {
             <span className="hero-linea aparece" style={retraso(0.2)}>
               <span>Lo que</span>
               <span className="hero-foto a ph telon-y" style={retraso(0.1)}>
-                <span className="ph-texto">Perfume · plano editorial</span>
+                <img src="/fotos/hero-perfume.webp" alt="" className="foto-img" />
               </span>
             </span>
             <span className="hero-linea sangria aparece" style={retraso(0.35)}>
               <span className="hero-foto b ph ph-b telon-y" style={retraso(0.25)}>
-                <span className="ph-texto">Packaging · mercadería en caja</span>
+                <img src="/fotos/hero-packaging.webp" alt="" className="foto-img" />
               </span>
               <span>buscás.</span>
             </span>
             <span className="hero-linea hero-bajada sangria aparece" style={retraso(0.5)}>
               <span>Para vos</span>
               <span className="hero-foto c ph telon-y" style={retraso(0.4)}>
-                <span className="ph-texto">Cosmética · detalle</span>
+                <img src="/fotos/hero-cosmetica.webp" alt="" className="foto-img" />
               </span>
               <span>o para tu negocio.</span>
             </span>
@@ -86,9 +86,9 @@ export default async function Inicio() {
           </p>
         </div>
         <div className="mosaico-movil">
-          <Foto texto="Perfume · plano vertical" className="telon-y" />
-          <Foto texto="Cosmética" b className="telon-x" style={retraso(0.12)} />
-          <Foto texto="Packaging" className="telon-x" style={retraso(0.24)} />
+          <Foto texto="Perfume" src="/fotos/hero-perfume.webp" className="telon-y" />
+          <Foto texto="Cosmética" src="/fotos/hero-cosmetica.webp" b className="telon-x" style={retraso(0.12)} />
+          <Foto texto="Packaging" src="/fotos/hero-packaging.webp" className="telon-x" style={retraso(0.24)} />
         </div>
         <p style={{ margin: 0, fontSize: 15, lineHeight: 1.5, color: 'var(--gris-claro)' }}>
           Perfumes, cosméticos y productos importados. Una selección para comprar al detalle o abastecer tu negocio.
@@ -122,8 +122,9 @@ export default async function Inicio() {
         </div>
         <div className="division">
           <Link href="/catalogo/" className="division-lado">
-            <span className="division-fondo" />
-            <span className="division-foto">Fotografía · compra personal</span>
+            <span className="division-fondo">
+              <img src="/fotos/compra-personal.webp" alt="" className="foto-img" loading="lazy" />
+            </span>
             <span className="rotulo oro-oscuro" style={{ position: 'relative', fontWeight: 600, letterSpacing: '.2em', color: 'var(--oro-oscuro)' }}>Compra personal</span>
             <span className="division-grande"><span>POR</span><span>MENOR</span></span>
             <span className="division-pie">
@@ -195,12 +196,12 @@ export default async function Inicio() {
           <span className="sobretitulo oro-oscuro" style={{ marginBottom: 24 }}>Explorá por categoría</span>
           <div style={{ display: 'flex', flexDirection: 'column', borderTop: '1px solid var(--negro)' }}>
             {[
-              ['Perfumes', '/perfumes/', 'Un perfume para cada estilo.', 'Fragancias · frascos'],
-              ['Cosmética', '/cosmetica/', 'Cuidado y belleza en un solo lugar.', 'Envases · colores'],
+              ['Perfumes', '/perfumes/', 'Un perfume para cada estilo.', '/fotos/categoria-perfumes.webp'],
+              ['Cosmética', '/cosmetica/', 'Cuidado y belleza en un solo lugar.', '/fotos/categoria-cosmetica.webp'],
             ].map(([nombre, href, bajada, foto]) => (
               <Link key={href} href={href} className="categoria-fila">
-                <span className="categoria-foto ph ph-claro-b" style={{ background: 'repeating-linear-gradient(135deg,#e2dacb 0 11px,#ebe5d9 11px 22px)' }}>
-                  <span className="ph-texto">{foto}</span>
+                <span className="categoria-foto ph ph-claro-b">
+                  <img src={foto} alt="" className="foto-img" loading="lazy" />
                 </span>
                 <span style={{ position: 'relative', display: 'flex', flexDirection: 'column', gap: 14 }}>
                   <span className="categoria-nombre">{nombre}</span>
@@ -215,8 +216,8 @@ export default async function Inicio() {
 
       <section className="fondo-negro" data-screen-label="Inicio · Mayoristas" style={{ paddingBottom: 'var(--seccion)' }}>
         <div className="franja-fotos">
-          <Foto texto="Mercadería en caja" />
-          <Foto texto="Empaques" b />
+          <Foto texto="Mercadería en caja" src="/fotos/mayorista-empaques.webp" />
+          <Foto texto="Empaques" src="/fotos/hero-packaging.webp" b />
           <Foto texto="Surtido por volumen" />
         </div>
         <div className="contenedor-angosto" style={{ padding: '0 var(--gutter)', display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(min(100%,440px),1fr))', gap: 'clamp(28px,5vw,80px)', alignItems: 'end' }}>
@@ -240,9 +241,9 @@ export default async function Inicio() {
       <section className="seccion fondo-marfil" data-screen-label="Inicio · Cosmética">
         <div className="contenedor-angosto" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(min(100%,360px),1fr))', gap: 'clamp(28px,4vw,64px)', alignItems: 'center' }}>
           <div className="mosaico-cosmetica">
-            <Foto texto="Envases sobre fondo claro" clara style={{ gridRow: '1 / 3', aspectRatio: '3 / 4.4' }} />
-            <Foto texto="Textura / color" clara b style={{ aspectRatio: '1 / 1', marginTop: '40%' }} />
-            <Foto texto="Detalle de packaging" clara style={{ aspectRatio: '1 / 1' }} />
+            <Foto texto="Envases sobre fondo claro" src="/fotos/cosmetica-envases.webp" clara style={{ gridRow: '1 / 3', aspectRatio: '3 / 4.4' }} />
+            <Foto texto="Textura y color" src="/fotos/cosmetica-textura.webp" clara b style={{ aspectRatio: '1 / 1', marginTop: '40%' }} />
+            <Foto texto="Detalle de packaging" src="/fotos/mayorista-empaques.webp" clara style={{ aspectRatio: '1 / 1' }} />
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 20, maxWidth: 520 }}>
             <span className="sobretitulo oro-oscuro">Cosmética</span>

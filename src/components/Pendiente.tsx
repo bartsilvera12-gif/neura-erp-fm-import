@@ -6,15 +6,17 @@ export function Pendiente({ children = 'Pendiente de confirmación', grande = fa
   return <span className={grande ? 'pendiente pendiente-grande' : 'pendiente'}>{children}</span>;
 }
 
-/** Lugar reservado para una foto que todavía no existe. */
+/** Lugar reservado para una foto. Con `src` muestra la foto; sin ella, el rótulo de lo que falta. */
 export function Foto({
   texto,
+  src,
   clara = false,
   b = false,
   className = '',
   style,
 }: {
   texto: string;
+  src?: string;
   clara?: boolean;
   b?: boolean;
   className?: string;
@@ -23,7 +25,7 @@ export function Foto({
   const fondo = clara ? (b ? 'ph-claro-b' : 'ph-claro') : b ? 'ph-b' : '';
   return (
     <div className={`ph ${fondo} ${className}`} style={style}>
-      <span className="ph-texto">{texto}</span>
+      {src ? <img src={src} alt={texto} className="foto-img" loading="lazy" /> : <span className="ph-texto">{texto}</span>}
     </div>
   );
 }

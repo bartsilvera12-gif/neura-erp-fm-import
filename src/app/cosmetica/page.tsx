@@ -24,9 +24,9 @@ export default async function PaginaCosmetica() {
             </p>
           </div>
           <div className="mosaico-hero">
-            <Foto texto="Envases · fondo claro" clara className="telon-y" style={{ height: 'clamp(220px,34vw,480px)' }} />
-            <Foto texto="Colores de producto" clara b className="telon-y" style={{ height: 'clamp(160px,24vw,340px)', '--retraso': '.22s' } as React.CSSProperties} />
-            <Foto texto="Detalle de textura" clara className="telon-y" style={{ height: 'clamp(200px,29vw,410px)', '--retraso': '.34s' } as React.CSSProperties} />
+            <Foto texto="Envases sobre fondo claro" src="/fotos/cosmetica-envases.webp" clara className="telon-y" style={{ height: 'clamp(220px,34vw,480px)' }} />
+            <Foto texto="Colores de producto" src="/fotos/categoria-cosmetica.webp" clara b className="telon-y" style={{ height: 'clamp(160px,24vw,340px)', '--retraso': '.22s' } as React.CSSProperties} />
+            <Foto texto="Detalle de textura" src="/fotos/cosmetica-textura.webp" clara className="telon-y" style={{ height: 'clamp(200px,29vw,410px)', '--retraso': '.34s' } as React.CSSProperties} />
           </div>
         </div>
       </section>

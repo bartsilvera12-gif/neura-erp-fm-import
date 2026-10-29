@@ -24,6 +24,26 @@ npm run build    # genera /out
 - `public/frasco-perfume.js`: la animación del frasco, el custom element del prototipo sin cambios.
 - `prototipo/`: diseño original exportado de Claude Design (`FM Importados.dc.html` es la versión vigente).
 
+### Fotos
+
+Las fotos de ambiente en `public/fotos/` son provisorias, de Pexels (licencia libre, sin atribución obligatoria), en WebP a 1200 px:
+
+| Archivo | Pexels |
+|---|---|
+| `hero-perfume.webp` | 33711973 |
+| `hero-packaging.webp` | 16722451 |
+| `hero-cosmetica.webp` | 28872149 |
+| `compra-personal.webp` | 7270663 |
+| `categoria-perfumes.webp` | 32630387 |
+| `categoria-cosmetica.webp` | 8776804 |
+| `cosmetica-envases.webp` | 34939748 |
+| `cosmetica-textura.webp` | 7256104 |
+| `mayorista-empaques.webp` | 5128083 |
+
+Varias muestran marcas de terceros (Bentley, Victoria's Secret, Ivy Dubai, Novellista); conviene reemplazarlas por fotos propias del cliente antes de producción. Siguen sin foto "Mercadería por volumen", "Surtido por volumen", las de Nosotros y las de los productos.
+
+Para agregar una: `cwebp -q 78 -resize 1200 0 original.jpg -o public/fotos/nombre.webp` y pasarla como `src` al componente `Foto`.
+
 ### Publicar
 
 - **Vercel** despliega desde `main` (QA).
