@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600&display=swap" rel="stylesheet">
+<style>html,body{margin:0;background:#1a1814}a{color:#c8a45c}a:hover{color:#f5f1e8}</style>
+</helmet>
+<div style="min-height:100vh;padding:48px;font-family:'Hanken Grotesk',sans-serif;color:#f5f1e8">
+  <div style="display:flex;flex-wrap:wrap;gap:40px;align-items:flex-start">
+    <sc-for list="{{ screens }}" as="s" hint-placeholder-count="6">
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <span style="font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#bdb6a8">{{ s.label }}</span>
+        <div style="width:390px;height:844px;border-radius:44px;padding:10px;background:#050505;box-shadow:0 0 0 1px #2b2720">
+          <iframe src="{{ s.src }}" title="{{ s.label }}" style="display:block;width:370px;height:824px;border:none;border-radius:34px;background:#0c0b09"></iframe>
+        </div>
+      </div>
+    </sc-for>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  renderVals() {
+    const f = 'FM%20Importados.dc.html';
+    return { screens: [['Inicio', '#/'], ['Catálogo', '#/catalogo'], ['Perfumes', '#/perfumes'], ['Mayoristas', '#/mayoristas'], ['Producto', '#/producto/fragancia-muestra-a'], ['Carrito', '#/consultas'], ['Contacto', '#/contacto']]
+      .map(([label, h]) => ({ label, src: f + h })) };
+  }
+}
+</script>
+</body>
+</html>
