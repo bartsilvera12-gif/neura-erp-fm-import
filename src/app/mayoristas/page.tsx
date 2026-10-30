@@ -4,6 +4,8 @@ import { Pendiente } from '@/components/Pendiente';
 import { listarProductos } from '@/lib/catalogo/servicio';
 import { ACENTO_VERDE, CONDICIONES_MAYORISTAS } from '@/lib/sitio';
 
+export const revalidate = 30;
+
 export const metadata: Metadata = {
   title: 'Mayoristas',
   description: 'Propuesta mayorista de perfumes, cosméticos y productos importados para revendedores, emprendedores y comercios.',

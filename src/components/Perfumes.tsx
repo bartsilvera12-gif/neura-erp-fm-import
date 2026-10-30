@@ -7,7 +7,9 @@ import { VerMas } from './VerMas';
 
 /** Fragancias para descubrir y la grilla completa. */
 export function Perfumes({ perfumes }: { perfumes: Producto[] }) {
-  const descubrir = [perfumes[60], perfumes[150], perfumes[280], perfumes[420]].filter(Boolean);
+  const conFoto = perfumes.filter((p) => p.foto);
+  const destacados = conFoto.filter((p) => p.destacado);
+  const descubrir = (destacados.length >= 4 ? destacados : [conFoto[60], conFoto[150], conFoto[280], conFoto[420]]).filter(Boolean).slice(0, 4);
 
   return (
     <>
@@ -18,7 +20,7 @@ export function Perfumes({ perfumes }: { perfumes: Producto[] }) {
             {descubrir.map((p) => (
               <Link key={p.slug} href={rutaProducto(p)} className="descubrir-item">
                 <span className="zoom-fondo" />
-                <img src={p.foto} alt="" className="item-foto" loading="lazy" />
+                <img src={p.foto ?? ''} alt="" className="item-foto" loading="lazy" />
                 <span style={{ position: 'absolute', left: 18, right: 18, bottom: 18, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', gap: 12 }}>
                   <span style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
                     <span className="item-tipo">{p.categoria}</span>

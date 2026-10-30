@@ -101,7 +101,7 @@ export function Consultas({ productos }: { productos: Producto[] }) {
             <div style={{ display: 'flex', flexDirection: 'column', borderTop: '1px solid var(--negro)' }}>
               {items.map(({ p, cantidad }) => (
                 <div key={p.slug} className="linea-carrito">
-                  <Link href={rutaProducto(p)} className="miniatura" aria-label={p.nombre}><img src={p.foto} alt="" loading="lazy" /></Link>
+                  <Link href={rutaProducto(p)} className="miniatura" aria-label={p.nombre}>{p.foto && <img src={p.foto} alt="" loading="lazy" />}</Link>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: 8, minWidth: 0 }}>
                     <Link href={rutaProducto(p)} className="serif" style={{ fontSize: 21, lineHeight: 1.1, textDecoration: 'none', color: 'var(--negro)' }}>{p.nombre}</Link>
                     <span style={{ fontSize: 12.5, color: 'var(--texto-3)' }}>{[p.categoria, p.presentacion, mayorista ? null : formatoPrecio(vivo(p).precio)].filter(Boolean).join(' · ')}</span>

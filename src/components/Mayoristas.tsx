@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
-import { CATEGORIAS, rutaProducto, type Producto } from '@/lib/catalogo/tipos';
+import { rutaProducto, type Producto } from '@/lib/catalogo/tipos';
 import { enlaceWhatsapp } from '@/lib/sitio';
 import { useTienda } from '@/lib/tienda/contexto';
 import { mensajeMayorista, type SolicitudMayorista } from '@/lib/tienda/mensajes';
@@ -29,7 +29,7 @@ export function ListaVolumen({ productos }: { productos: Producto[] }) {
           <p style={{ margin: 0, fontSize: 15, color: 'var(--texto-2)' }}>Elegí productos, indicá cantidades aproximadas y sumalos a tu cotización.</p>
         </div>
         <div style={{ display: 'flex', gap: 6 }}>
-          {['Todos', ...CATEGORIAS].map((c) => (
+          {['Todos', ...new Set(productos.map((p) => p.categoria))].map((c) => (
             <button key={c} type="button" className="chip" aria-pressed={categoria === c} onClick={() => setCategoria(c)}>
               {c}
             </button>
@@ -43,7 +43,7 @@ export function ListaVolumen({ productos }: { productos: Producto[] }) {
             const enLista = tiene(p.slug);
             return (
               <div key={p.slug} className="fila-volumen">
-                <Link href={rutaProducto(p)} className="miniatura" aria-label={p.nombre}><img src={p.foto} alt="" loading="lazy" /></Link>
+                <Link href={rutaProducto(p)} className="miniatura" aria-label={p.nombre}>{p.foto && <img src={p.foto} alt="" loading="lazy" />}</Link>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 3, minWidth: 0 }}>
                   <Link href={rutaProducto(p)} className="serif" style={{ fontSize: 20, textDecoration: 'none', color: 'var(--negro)' }}>{p.nombre}</Link>
                   <span style={{ fontSize: 12.5, color: 'var(--texto-3)' }}>{[p.categoria, p.presentacion].filter(Boolean).join(' · ')}</span>

@@ -1,5 +1,6 @@
 /**
- * Genera src/lib/catalogo/productos.json desde el schema `fmimport`.
+ * Genera el respaldo src/lib/catalogo/productos.json, que la web usa solo si el ERP
+ * no responde. El catálogo en vivo sale de /api/public/catalogo.
  *
  * Este repo es público: la consulta pide solo lo que se puede mostrar, nunca
  * costos ni stock exacto. Publica perfumes y cosmética con foto y stock.

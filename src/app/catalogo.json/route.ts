@@ -1,6 +1,7 @@
 import { listarProductos } from '@/lib/catalogo/servicio';
 
-export const dynamic = 'force-static';
+export const revalidate = 30;
+
 
 /** Lo que usa el buscador del encabezado. */
 export async function GET() {

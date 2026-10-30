@@ -4,11 +4,12 @@ import { DetalleProducto } from '@/components/DetalleProducto';
 import { listarProductos, obtenerProducto, productosRelacionados } from '@/lib/catalogo/servicio';
 import { formatoPrecio, rutaProducto } from '@/lib/catalogo/tipos';
 
-/** Export estático: una página por producto, generada en el build. */
+export const revalidate = 30;
+
+/** Las que falten se arman al primer pedido: un producto nuevo no pide desplegar. */
 export async function generateStaticParams() {
   return (await listarProductos()).map((p) => ({ slug: p.slug }));
 }
-export const dynamicParams = false;
 
 type Props = { params: Promise<{ slug: string }> };
 

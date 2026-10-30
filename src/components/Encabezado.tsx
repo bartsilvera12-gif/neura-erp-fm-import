@@ -178,7 +178,7 @@ export function Encabezado() {
             <div style={{ display: 'flex', flexDirection: 'column', marginTop: 12 }}>
               {resultados.map((p) => (
                 <Link key={p.slug} href={rutaProducto(p)} className="resultado">
-                  <span className="miniatura"><img src={p.foto} alt="" loading="lazy" /></span>
+                  <span className="miniatura">{p.foto && <img src={p.foto} alt="" loading="lazy" />}</span>
                   <span style={{ display: 'flex', flexDirection: 'column', gap: 4, minWidth: 0 }}>
                     <span className="serif" style={{ fontSize: 21 }}>{p.nombre}</span>
                     <span style={{ fontSize: 12, color: 'var(--gris)' }}>{p.categoria}</span>

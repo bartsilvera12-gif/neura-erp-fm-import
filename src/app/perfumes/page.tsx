@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 import { Perfumes } from '@/components/Perfumes';
 import { listarProductos } from '@/lib/catalogo/servicio';
 
+export const revalidate = 30;
+
 export const metadata: Metadata = {
   title: 'Perfumes',
   description: 'Un perfume para cada estilo. Fragancias importadas por menor y por mayor.',

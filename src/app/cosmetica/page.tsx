@@ -3,6 +3,8 @@ import { Foto } from '@/components/Pendiente';
 import { TarjetaProducto } from '@/components/TarjetaProducto';
 import { listarProductos } from '@/lib/catalogo/servicio';
 
+export const revalidate = 30;
+
 export const metadata: Metadata = {
   title: 'Cosmética',
   description: 'Cuidado y belleza en un solo lugar. Productos cosméticos importados.',

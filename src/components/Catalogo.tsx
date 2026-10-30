@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useEffect, useMemo, useState } from 'react';
-import { CATEGORIAS, type Producto } from '@/lib/catalogo/tipos';
+import type { Producto } from '@/lib/catalogo/tipos';
 import { ACENTO_VERDE } from '@/lib/sitio';
 import { useTienda } from '@/lib/tienda/contexto';
 import { TarjetaProducto } from './TarjetaProducto';
@@ -98,7 +98,7 @@ export function Catalogo({ productos }: { productos: Producto[] }) {
             <div>
               <span className="rotulo">Categoría</span>
               <div className="chips">
-                {['Todos', ...CATEGORIAS].map((c) => (
+                {['Todos', ...new Set(productos.map((p) => p.categoria))].map((c) => (
                   <button
                     key={c}
                     type="button"

@@ -21,10 +21,11 @@ export function TarjetaProducto({ producto: p, mayorista = false }: { producto: 
     <article className="tarjeta">
       <Link href={href} aria-label={p.nombre} className="tarjeta-foto">
         <div className="ph ph-claro">
-          <img src={p.foto} alt={p.nombre} className="foto-img" loading="lazy" />
+          {p.foto ? <img src={p.foto} alt={p.nombre} className="foto-img" loading="lazy" /> : <span className="ph-texto">Foto próximamente</span>}
         </div>
       </Link>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 5 }}>
+        {p.marca && <span className="rotulo">{p.marca}</span>}
         <Link href={href} className="tarjeta-nombre">{p.nombre}</Link>
         {p.presentacion && <span style={{ fontSize: 13, color: 'var(--texto-3)' }}>{p.presentacion}</span>}
       </div>
@@ -36,7 +37,9 @@ export function TarjetaProducto({ producto: p, mayorista = false }: { producto: 
         </div>
       )}
       <div className="tarjeta-pie">
-        <span style={{ fontSize: 13, fontWeight: 600 }}>{mayorista ? ETIQUETA_PRECIO_MAYOR : formatoPrecio(precio)}</span>
+        <span style={{ fontSize: 13, fontWeight: 600 }}>{mayorista ? ETIQUETA_PRECIO_MAYOR : formatoPrecio(precio)}
+          {!mayorista && p.precio_anterior && <s style={{ marginLeft: 6, fontWeight: 400, color: 'var(--texto-3)' }}>{formatoPrecio(p.precio_anterior)}</s>}
+        </span>
         {disponible ? (
           <button type="button" className="btn-texto" onClick={() => agregar(p.slug, mayorista ? cantidad : 1, p.nombre)}>
             {etiquetaAgregar(mayorista, tiene(p.slug))}

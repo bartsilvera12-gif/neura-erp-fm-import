@@ -26,16 +26,19 @@ export function DetalleProducto({ producto: p, relacionados }: { producto: Produ
 
         <div className="ficha">
           <div className="ph ph-claro" style={{ aspectRatio: '4 / 5' }}>
-            <img src={p.foto} alt={p.nombre} className="foto-img" style={{ objectFit: 'contain' }} />
+            {p.foto ? <img src={p.foto} alt={p.nombre} className="foto-img" style={{ objectFit: 'contain' }} /> : <span className="ph-texto">Foto próximamente</span>}
           </div>
 
           <div className="sticky-escritorio" style={{ display: 'flex', flexDirection: 'column', gap: 22, position: 'sticky', top: 110 }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
               <h1 className="serif" style={{ margin: 0, fontSize: 'clamp(38px,4.4vw,68px)', lineHeight: 0.98, letterSpacing: '-.015em' }}>{p.nombre}</h1>
-              <span style={{ fontSize: 14, color: 'var(--texto-2)' }}>{p.categoria}</span>
+              <span style={{ fontSize: 14, color: 'var(--texto-2)' }}>{[p.marca, p.categoria].filter(Boolean).join(' · ')}</span>
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', borderTop: '1px solid var(--negro)' }}>
-              <div className="fila-ficha"><span style={{ color: 'var(--texto-3)' }}>Precio</span><span style={{ fontWeight: 600 }}>{formatoPrecio(precio)}</span></div>
+              <div className="fila-ficha"><span style={{ color: 'var(--texto-3)' }}>Precio</span><span style={{ fontWeight: 600 }}>
+                {formatoPrecio(precio)}
+                {p.precio_anterior && <s style={{ marginLeft: 8, fontWeight: 400, color: 'var(--texto-3)' }}>{formatoPrecio(p.precio_anterior)}</s>}
+              </span></div>
               <div className="fila-ficha"><span style={{ color: 'var(--texto-3)' }}>Disponibilidad</span><span>{disponible ? 'Disponible' : 'Sin stock'}</span></div>
               {p.presentacion && <div className="fila-ficha"><span style={{ color: 'var(--texto-3)' }}>Presentación</span><span>{p.presentacion}</span></div>}
             </div>
@@ -53,6 +56,7 @@ export function DetalleProducto({ producto: p, relacionados }: { producto: Produ
               {ACENTO_VERDE && <span className="punto-verde" />}
               Consultar por WhatsApp
             </a>
+            {p.descripcion && <p style={{ margin: 0, fontSize: 15, lineHeight: 1.6, color: 'var(--texto-2)', whiteSpace: 'pre-line' }}>{p.descripcion}</p>}
             <p style={{ margin: 0, fontSize: 13, lineHeight: 1.5, color: 'var(--texto-3)' }}>
               Sin pagos en línea. Tu pedido queda sujeto a confirmación comercial de FM Importados.
             </p>

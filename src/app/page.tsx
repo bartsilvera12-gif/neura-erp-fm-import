@@ -10,6 +10,8 @@ import { rutaProducto } from '@/lib/catalogo/tipos';
 import { PrecioVivo } from '@/components/PrecioVivo';
 import { ACENTO_VERDE } from '@/lib/sitio';
 
+export const revalidate = 30;
+
 const FOTOS_CARRUSEL = [
   { src: '/fotos/hero-packaging.webp', alt: 'Perfume junto a su caja' },
   { src: '/fotos/categoria-cosmetica.webp', alt: 'Colores de producto cosmético' },
@@ -26,6 +28,10 @@ const SELECCION = [20, 110, 230, 340, 450];
 
 export default async function Inicio() {
   const [perfumes, destacados] = await Promise.all([listarProductos('Perfumes'), productosDestacados()]);
+  const conFoto = perfumes.filter((p) => p.foto);
+  // Lo destacado en el ERP manda; hasta que haya, una muestra del catálogo.
+  const marcados = conFoto.filter((p) => p.destacado).slice(0, 5);
+  const seleccion = marcados.length ? marcados : SELECCION.flatMap((i) => conFoto[i] ?? []);
 
   return (
     <>
@@ -198,10 +204,10 @@ export default async function Inicio() {
               <FrascoPerfume />
               <span className="capa-rotulo" style={{ position: 'absolute', left: 18, top: 16, pointerEvents: 'none', fontSize: 10, letterSpacing: '.1em' }}>Tocá el frasco</span>
             </div>
-            {SELECCION.flatMap((i) => perfumes[i] ?? []).map((p) => (
+            {seleccion.map((p) => (
               <Link key={p.slug} href={rutaProducto(p)} className="seleccion-item">
                 <span className="zoom-fondo" />
-                <img src={p.foto} alt="" className="item-foto" loading="lazy" />
+                <img src={p.foto ?? ''} alt="" className="item-foto" loading="lazy" />
                 <span className="item-pie">
                   <span style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
                     <span className="item-tipo">{p.categoria}</span>
