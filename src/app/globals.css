@@ -888,6 +888,27 @@ button {
 
 /* ───────── Inicio ───────── */
 
+.fondo-degradado {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+/* El degradado es claro y el texto del hero es crema: el velo mantiene el contraste */
+.fondo-degradado::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(12, 11, 9, 0.62);
+}
+.hero,
+.hero-movil {
+  position: relative;
+}
+.hero > :not(.fondo-degradado),
+.hero-movil > :not(.fondo-degradado) {
+  position: relative;
+  z-index: 1;
+}
 .hero {
   height: calc(100vh - 84px);
   min-height: 660px;
