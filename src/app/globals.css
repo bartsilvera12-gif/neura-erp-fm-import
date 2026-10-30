@@ -1703,7 +1703,7 @@ button {
   position: absolute;
   display: flex;
   flex-direction: column;
-  gap: clamp(12px, 1.6vw, 24px);
+  gap: 4px;
   width: 200vw;
   transform: rotate(-25deg);
 }
@@ -1726,7 +1726,7 @@ button {
   flex: none;
   width: clamp(220px, 24vw, 400px);
   aspect-ratio: 4 / 3;
-  margin-right: clamp(12px, 1.6vw, 24px);
+  margin-right: 4px;
   overflow: hidden;
 }
 .carrusel-tarjeta img {

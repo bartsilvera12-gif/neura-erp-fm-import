@@ -1,4 +1,4 @@
-:HL["/_next/static/chunks/0hr3o08nwot-x.css","style"]
+:HL["/_next/static/chunks/35p8o6xn68r27.css","style"]
 :HL["/_next/static/media/b8dfa3d21eb22018-s.p.3lxpqujs87tck.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
 :HL["/_next/static/media/d236bb4c0caf68e4-s.p.14og3_uq6yls0.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
 :HL["/_next/static/media/d6c1ff7e86974212-s.p.40sczeszzbjw1.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
@@ -6,4 +6,4 @@
 :HL["/assets/logo.jpeg","image"]
 2:[["children",{"s":"__PAGE__","h":160}]]
 1:[["children",{"s":"contacto","h":64,"c":"$Q2"}]]
-0:{"b":"GbAnRw6aAlUstVkH5jI1D","t":{"t":{"s":"","h":16,"c":"$Q1"}}}
+0:{"b":"g_zqjvfN5j-K1ENMHw-Zy","t":{"t":{"s":"","h":16,"c":"$Q1"}}}
