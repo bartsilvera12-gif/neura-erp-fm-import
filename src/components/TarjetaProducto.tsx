@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
-import { ETIQUETA_PRECIO, rutaProducto, type Producto } from '@/lib/catalogo/tipos';
+import { ETIQUETA_PRECIO_MAYOR, formatoPrecio, rutaProducto, type Producto } from '@/lib/catalogo/tipos';
 import { useTienda } from '@/lib/tienda/contexto';
 
 export function etiquetaAgregar(mayorista: boolean, enLista: boolean) {
@@ -35,7 +35,7 @@ export function TarjetaProducto({ producto: p, mayorista = false }: { producto: 
         </div>
       )}
       <div className="tarjeta-pie">
-        <span style={{ fontSize: 13, fontWeight: 600 }}>{ETIQUETA_PRECIO}</span>
+        <span style={{ fontSize: 13, fontWeight: 600 }}>{mayorista ? ETIQUETA_PRECIO_MAYOR : formatoPrecio(p.precio)}</span>
         <button type="button" className="btn-texto" onClick={() => agregar(p.slug, mayorista ? cantidad : 1, p.nombre)}>
           {etiquetaAgregar(mayorista, tiene(p.slug))}
         </button>

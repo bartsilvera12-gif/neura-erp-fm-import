@@ -1,4 +1,4 @@
-import type { Producto } from '@/lib/catalogo/tipos';
+import { formatoPrecio, type Producto } from '@/lib/catalogo/tipos';
 import type { LineaConsulta } from './almacenamiento';
 
 /**
@@ -7,7 +7,7 @@ import type { LineaConsulta } from './almacenamiento';
  */
 
 export function mensajeProducto(p: Producto, cantidad: number) {
-  return `Hola FM Importados, quiero consultar por: ${p.nombre}. Cantidad: ${cantidad}. ¿Tienen disponibilidad y precio?`;
+  return `Hola FM Importados, quiero consultar por: ${p.nombre}. Precio: ${formatoPrecio(p.precio)}. Cantidad: ${cantidad}. ¿Tienen disponibilidad?`;
 }
 
 export interface DatosConsulta {
@@ -20,8 +20,10 @@ export interface DatosConsulta {
 export function mensajeConsulta(lineas: LineaConsulta[], productos: Producto[], d: DatosConsulta) {
   const detalle = lineas.map((l) => {
     const p = productos.find((x) => x.slug === l.slug);
-    return `• ${p?.nombre ?? l.slug} × ${l.cantidad}`;
+    const precio = p && !d.mayorista ? ` · ${formatoPrecio(p.precio * l.cantidad)}` : '';
+    return `• ${p?.nombre ?? l.slug} × ${l.cantidad}${precio}`;
   });
+  const total = lineas.reduce((t, l) => t + (productos.find((x) => x.slug === l.slug)?.precio ?? 0) * l.cantidad, 0);
   return [
     'Hola FM Importados, quiero hacer una consulta.',
     `Tipo: ${d.mayorista ? 'Cotización mayorista' : 'Pedido minorista'}`,
@@ -29,6 +31,7 @@ export function mensajeConsulta(lineas: LineaConsulta[], productos: Producto[], 
     d.mayorista && d.ciudad ? `Ciudad: ${d.ciudad}` : null,
     '',
     ...detalle,
+    d.mayorista ? null : `Subtotal estimado: ${formatoPrecio(total)}`,
     d.observaciones ? `\nObservaciones: ${d.observaciones}` : null,
     '',
     'Entiendo que el pedido queda sujeto a confirmación comercial.',

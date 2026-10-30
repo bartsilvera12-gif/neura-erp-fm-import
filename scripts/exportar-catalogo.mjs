@@ -2,7 +2,7 @@
  * Genera src/lib/catalogo/productos.json desde el schema `fmimport`.
  *
  * Este repo es público: la consulta pide solo lo que se puede mostrar, nunca
- * costos, precios ni stock exacto. Publica perfumes y cosmética con foto y stock.
+ * costos ni stock exacto. Publica perfumes y cosmética con foto y stock.
  *
  *   DATABASE_URL=postgres://… node scripts/exportar-catalogo.mjs
  */
@@ -17,7 +17,7 @@ if (!process.env.DATABASE_URL) throw new Error('Falta DATABASE_URL');
 const consulta = `
   SELECT coalesce(json_agg(x ORDER BY x.nombre, x.sku), '[]')
   FROM (
-    SELECT p.sku, p.nombre, c.nombre AS categoria, p.imagen_path
+    SELECT p.sku, p.nombre, c.nombre AS categoria, p.imagen_path, round(p.precio_venta)::bigint AS precio
     FROM fmimport.productos p
     JOIN fmimport.categorias_productos c ON c.id = p.categoria_principal_id
     WHERE p.sku LIKE 'FM-%'
@@ -49,6 +49,7 @@ const productos = JSON.parse(salida).map((f) => {
     categoria: CATEGORIAS[f.categoria],
     nombre: f.nombre.trim().replace(/\s+/g, ' '),
     presentacion: ml ? `${ml[1]} ml` : null,
+    precio: Number(f.precio),
     foto: URL_FOTOS + f.imagen_path,
   };
 });

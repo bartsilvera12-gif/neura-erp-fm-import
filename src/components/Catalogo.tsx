@@ -8,7 +8,7 @@ import { useTienda } from '@/lib/tienda/contexto';
 import { TarjetaProducto } from './TarjetaProducto';
 import { VerMas } from './VerMas';
 
-type Orden = 'az' | 'za' | 'cat';
+type Orden = 'az' | 'za' | 'cat' | 'barato' | 'caro';
 
 export function Catalogo({ productos }: { productos: Producto[] }) {
   const { unidades } = useTienda();
@@ -32,11 +32,15 @@ export function Catalogo({ productos }: { productos: Producto[] }) {
           (!t || `${p.nombre} ${p.categoria}`.toLowerCase().includes(t)),
       )
       .sort((a, b) =>
-        orden === 'za'
-          ? b.nombre.localeCompare(a.nombre)
-          : orden === 'cat'
-            ? a.categoria.localeCompare(b.categoria) || a.nombre.localeCompare(b.nombre)
-            : a.nombre.localeCompare(b.nombre),
+        orden === 'barato'
+          ? a.precio - b.precio
+          : orden === 'caro'
+            ? b.precio - a.precio
+            : orden === 'za'
+              ? b.nombre.localeCompare(a.nombre)
+              : orden === 'cat'
+                ? a.categoria.localeCompare(b.categoria) || a.nombre.localeCompare(b.nombre)
+                : a.nombre.localeCompare(b.nombre),
       );
   }, [productos, q, categoria, orden]);
 
@@ -113,6 +117,8 @@ export function Catalogo({ productos }: { productos: Producto[] }) {
                 <option value="az">Nombre A–Z</option>
                 <option value="za">Nombre Z–A</option>
                 <option value="cat">Por categoría</option>
+                <option value="barato">Menor precio</option>
+                <option value="caro">Mayor precio</option>
               </select>
             </div>
           </aside>

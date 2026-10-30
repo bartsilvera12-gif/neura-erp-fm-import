@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
-import { ETIQUETA_DISPONIBILIDAD, ETIQUETA_PRECIO, rutaCategoria, type Producto } from '@/lib/catalogo/tipos';
+import { ETIQUETA_DISPONIBILIDAD, formatoPrecio, rutaCategoria, type Producto } from '@/lib/catalogo/tipos';
 import { ACENTO_VERDE, enlaceWhatsapp } from '@/lib/sitio';
 import { useTienda } from '@/lib/tienda/contexto';
 import { mensajeProducto } from '@/lib/tienda/mensajes';
@@ -34,7 +34,7 @@ export function DetalleProducto({ producto: p, relacionados }: { producto: Produ
               <span style={{ fontSize: 14, color: 'var(--texto-2)' }}>{p.categoria}</span>
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', borderTop: '1px solid var(--negro)' }}>
-              <div className="fila-ficha"><span style={{ color: 'var(--texto-3)' }}>Precio</span><span style={{ fontWeight: 600 }}>{ETIQUETA_PRECIO}</span></div>
+              <div className="fila-ficha"><span style={{ color: 'var(--texto-3)' }}>Precio</span><span style={{ fontWeight: 600 }}>{formatoPrecio(p.precio)}</span></div>
               <div className="fila-ficha"><span style={{ color: 'var(--texto-3)' }}>Disponibilidad</span><span>{ETIQUETA_DISPONIBILIDAD}</span></div>
               {p.presentacion && <div className="fila-ficha"><span style={{ color: 'var(--texto-3)' }}>Presentación</span><span>{p.presentacion}</span></div>}
             </div>

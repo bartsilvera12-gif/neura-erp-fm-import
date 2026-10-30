@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
-import { ETIQUETA_PRECIO, rutaProducto, type Producto } from '@/lib/catalogo/tipos';
+import { ETIQUETA_PRECIO_MAYOR, formatoPrecio, rutaProducto, type Producto } from '@/lib/catalogo/tipos';
 import { enlaceWhatsapp } from '@/lib/sitio';
 import { useTienda } from '@/lib/tienda/contexto';
 import { mensajeConsulta } from '@/lib/tienda/mensajes';
@@ -55,7 +55,7 @@ export function Consultas({ productos }: { productos: Producto[] }) {
                   <Link href={rutaProducto(p)} className="miniatura" aria-label={p.nombre}><img src={p.foto} alt="" loading="lazy" /></Link>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: 8, minWidth: 0 }}>
                     <Link href={rutaProducto(p)} className="serif" style={{ fontSize: 21, lineHeight: 1.1, textDecoration: 'none', color: 'var(--negro)' }}>{p.nombre}</Link>
-                    <span style={{ fontSize: 12.5, color: 'var(--texto-3)' }}>{[p.categoria, p.presentacion, ETIQUETA_PRECIO].filter(Boolean).join(' · ')}</span>
+                    <span style={{ fontSize: 12.5, color: 'var(--texto-3)' }}>{[p.categoria, p.presentacion, mayorista ? null : formatoPrecio(p.precio)].filter(Boolean).join(' · ')}</span>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 16, flexWrap: 'wrap' }}>
                       <div className="contador">
                         <button type="button" onClick={() => cambiar(p.slug, -1)} aria-label="Restar">−</button>
@@ -71,7 +71,7 @@ export function Consultas({ productos }: { productos: Producto[] }) {
                       </button>
                     </div>
                   </div>
-                  <span style={{ fontSize: 13, color: 'var(--texto-3)', whiteSpace: 'nowrap' }} className="solo-escritorio">Subtotal a confirmar</span>
+                  <span style={{ fontSize: 13, color: 'var(--texto-3)', whiteSpace: 'nowrap' }} className="solo-escritorio">{mayorista ? ETIQUETA_PRECIO_MAYOR : formatoPrecio(p.precio * cantidad)}</span>
                 </div>
               ))}
             </div>
@@ -93,7 +93,7 @@ export function Consultas({ productos }: { productos: Producto[] }) {
                 {[
                   ['Productos', lineas.length],
                   ['Unidades', unidades],
-                  ['Subtotal estimado', 'Precios a confirmar'],
+                  ['Subtotal estimado', mayorista ? ETIQUETA_PRECIO_MAYOR : formatoPrecio(items.reduce((t, i) => t + i.p.precio * i.cantidad, 0))],
                 ].map(([k, v]) => (
                   <div key={k} style={{ display: 'flex', justifyContent: 'space-between', padding: '10px 0', borderBottom: '1px solid var(--linea-oscura)' }}>
                     <span style={{ color: 'var(--gris-medio)' }}>{k}</span>

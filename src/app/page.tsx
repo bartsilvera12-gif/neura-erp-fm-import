@@ -6,7 +6,7 @@ import { Foto } from '@/components/Pendiente';
 import { TarjetaProducto } from '@/components/TarjetaProducto';
 import { CarruselDiagonal } from '@/components/ui/CarruselDiagonal';
 import { listarProductos, productosDestacados } from '@/lib/catalogo/servicio';
-import { rutaProducto } from '@/lib/catalogo/tipos';
+import { formatoPrecio, rutaProducto } from '@/lib/catalogo/tipos';
 import { ACENTO_VERDE } from '@/lib/sitio';
 
 const FOTOS_CARRUSEL = [
@@ -206,7 +206,7 @@ export default async function Inicio() {
                     <span className="item-tipo">{p.categoria}</span>
                     <span className="item-nombre">{p.nombre}</span>
                   </span>
-                  <span style={{ fontSize: 12, color: 'var(--oro)', whiteSpace: 'nowrap' }}>Consultar precio</span>
+                  <span style={{ fontSize: 12, color: 'var(--oro)', whiteSpace: 'nowrap' }}>{formatoPrecio(p.precio)}</span>
                 </span>
               </Link>
             ))}

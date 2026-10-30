@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { DetalleProducto } from '@/components/DetalleProducto';
 import { listarProductos, obtenerProducto, productosRelacionados } from '@/lib/catalogo/servicio';
-import { rutaProducto } from '@/lib/catalogo/tipos';
+import { formatoPrecio, rutaProducto } from '@/lib/catalogo/tipos';
 
 /** Export estático: una página por producto, generada en el build. */
 export async function generateStaticParams() {
@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!p) return {};
   return {
     title: p.nombre,
-    description: `${p.nombre} · ${p.categoria}. Consultá precio y disponibilidad por WhatsApp.`,
+    description: `${p.nombre} · ${p.categoria}. ${formatoPrecio(p.precio)}. Consultá disponibilidad por WhatsApp.`,
     alternates: { canonical: rutaProducto(p) },
   };
 }
