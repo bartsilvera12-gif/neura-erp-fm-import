@@ -5,8 +5,8 @@ import { useEffect, useMemo, useState } from 'react';
 import { CATEGORIAS, type Producto } from '@/lib/catalogo/tipos';
 import { ACENTO_VERDE } from '@/lib/sitio';
 import { useTienda } from '@/lib/tienda/contexto';
-import { Pendiente } from './Pendiente';
 import { TarjetaProducto } from './TarjetaProducto';
+import { VerMas } from './VerMas';
 
 type Orden = 'az' | 'za' | 'cat';
 
@@ -15,7 +15,6 @@ export function Catalogo({ productos }: { productos: Producto[] }) {
   const [mayorista, setMayorista] = useState(false);
   const [q, setQ] = useState('');
   const [categoria, setCategoria] = useState('Todos');
-  const [tipo, setTipo] = useState('Todos');
   const [orden, setOrden] = useState<Orden>('az');
 
   // /catalogo/?modo=mayor llega desde Inicio y Mayoristas. Se lee en el navegador
@@ -24,19 +23,13 @@ export function Catalogo({ productos }: { productos: Producto[] }) {
     if (new URLSearchParams(window.location.search).get('modo') === 'mayor') setMayorista(true);
   }, []);
 
-  const tipos = useMemo(
-    () => [...new Set(productos.filter((p) => categoria === 'Todos' || p.categoria === categoria).map((p) => p.tipo))],
-    [productos, categoria],
-  );
-
   const lista = useMemo(() => {
     const t = q.trim().toLowerCase();
     return productos
       .filter(
         (p) =>
           (categoria === 'Todos' || p.categoria === categoria) &&
-          (tipo === 'Todos' || p.tipo === tipo) &&
-          (!t || `${p.nombre} ${p.categoria} ${p.tipo}`.toLowerCase().includes(t)),
+          (!t || `${p.nombre} ${p.categoria}`.toLowerCase().includes(t)),
       )
       .sort((a, b) =>
         orden === 'za'
@@ -45,12 +38,11 @@ export function Catalogo({ productos }: { productos: Producto[] }) {
             ? a.categoria.localeCompare(b.categoria) || a.nombre.localeCompare(b.nombre)
             : a.nombre.localeCompare(b.nombre),
       );
-  }, [productos, q, categoria, tipo, orden]);
+  }, [productos, q, categoria, orden]);
 
   const limpiar = () => {
     setQ('');
     setCategoria('Todos');
-    setTipo('Todos');
   };
 
   return (
@@ -71,7 +63,7 @@ export function Catalogo({ productos }: { productos: Producto[] }) {
             <input
               value={q}
               onChange={(e) => setQ(e.target.value)}
-              placeholder="Buscar por nombre, tipo o categoría"
+              placeholder="Buscar por nombre o categoría"
               aria-label="Buscar en el catálogo"
               style={{ flex: 1, minWidth: 0, background: 'transparent', border: 'none', padding: '18px 0', color: 'var(--crema)', fontSize: 18, outline: 'none' }}
             />
@@ -108,22 +100,9 @@ export function Catalogo({ productos }: { productos: Producto[] }) {
                     type="button"
                     className="chip"
                     aria-pressed={categoria === c}
-                    onClick={() => {
-                      setCategoria(c);
-                      setTipo('Todos');
-                    }}
+                    onClick={() => setCategoria(c)}
                   >
                     {c}
-                  </button>
-                ))}
-              </div>
-            </div>
-            <div>
-              <span className="rotulo">Tipo de producto</span>
-              <div className="chips">
-                {['Todos', ...tipos].map((t) => (
-                  <button key={t} type="button" className="chip suave" aria-pressed={tipo === t} onClick={() => setTipo(t)}>
-                    {t}
                   </button>
                 ))}
               </div>
@@ -136,19 +115,18 @@ export function Catalogo({ productos }: { productos: Producto[] }) {
                 <option value="cat">Por categoría</option>
               </select>
             </div>
-            <div style={{ gap: 10, borderTop: '1px solid var(--linea-clara)', paddingTop: 16, minWidth: 200 }}>
-              <span className="rotulo">Marca · Disponibilidad · Precio · Subcategoría</span>
-              <span style={{ fontSize: 13, lineHeight: 1.5, color: 'var(--texto-3)' }}>Se habilitan cuando se cargue el catálogo real.</span>
-            </div>
           </aside>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: 24, minWidth: 0 }}>
-            <Pendiente grande>Productos de muestra · reemplazar con el catálogo real</Pendiente>
-            <div className="grilla-productos">
-              {lista.map((p) => (
-                <TarjetaProducto key={p.slug} producto={p} mayorista={mayorista} />
-              ))}
-            </div>
+            <VerMas key={`${q}|${categoria}|${orden}`} items={lista}>
+              {(visibles) => (
+                <div className="grilla-productos">
+                  {visibles.map((p) => (
+                    <TarjetaProducto key={p.slug} producto={p} mayorista={mayorista} />
+                  ))}
+                </div>
+              )}
+            </VerMas>
             {!lista.length && (
               <div style={{ padding: '64px 0', borderTop: '1px solid var(--linea-clara)', display: 'flex', flexDirection: 'column', gap: 12 }}>
                 <span className="serif" style={{ fontSize: 30 }}>No encontramos productos con esos filtros.</span>

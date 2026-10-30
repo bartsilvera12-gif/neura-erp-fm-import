@@ -7,7 +7,7 @@ import type { LineaConsulta } from './almacenamiento';
  */
 
 export function mensajeProducto(p: Producto, cantidad: number) {
-  return `Hola FM Importados, quiero consultar por: ${p.nombre} (${p.presentacion}). Cantidad: ${cantidad}. ¿Tienen disponibilidad y precio?`;
+  return `Hola FM Importados, quiero consultar por: ${p.nombre}. Cantidad: ${cantidad}. ¿Tienen disponibilidad y precio?`;
 }
 
 export interface DatosConsulta {
@@ -20,7 +20,7 @@ export interface DatosConsulta {
 export function mensajeConsulta(lineas: LineaConsulta[], productos: Producto[], d: DatosConsulta) {
   const detalle = lineas.map((l) => {
     const p = productos.find((x) => x.slug === l.slug);
-    return `• ${p?.nombre ?? l.slug} (${p?.presentacion ?? '—'}) × ${l.cantidad}`;
+    return `• ${p?.nombre ?? l.slug} × ${l.cantidad}`;
   });
   return [
     'Hola FM Importados, quiero hacer una consulta.',

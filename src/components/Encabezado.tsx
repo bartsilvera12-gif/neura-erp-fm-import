@@ -14,7 +14,10 @@ function activo(ruta: string, href: string) {
   return ruta.startsWith(href.replace(/\/$/, ''));
 }
 
-export function Encabezado({ productos }: { productos: Producto[] }) {
+/** Va en todas las páginas: solo lo que necesita el buscador. */
+export type ProductoBuscable = Pick<Producto, 'slug' | 'nombre' | 'categoria'>;
+
+export function Encabezado({ productos }: { productos: ProductoBuscable[] }) {
   const ruta = usePathname();
   const { unidades } = useTienda();
   const [scroll, setScroll] = useState(false);
@@ -60,7 +63,7 @@ export function Encabezado({ productos }: { productos: Producto[] }) {
 
   const termino = q.trim().toLowerCase();
   const resultados = termino
-    ? productos.filter((p) => `${p.nombre} ${p.categoria} ${p.tipo}`.toLowerCase().includes(termino)).slice(0, 6)
+    ? productos.filter((p) => `${p.nombre} ${p.categoria}`.toLowerCase().includes(termino)).slice(0, 6)
     : [];
 
   const carrito = (
@@ -168,10 +171,10 @@ export function Encabezado({ productos }: { productos: Producto[] }) {
             <div style={{ display: 'flex', flexDirection: 'column', marginTop: 12 }}>
               {resultados.map((p) => (
                 <Link key={p.slug} href={rutaProducto(p)} className="resultado">
-                  <span className="miniatura" style={{ background: 'repeating-linear-gradient(135deg,#1b1915 0 8px,#24211b 8px 16px)' }} />
+                  <span className="miniatura" />
                   <span style={{ display: 'flex', flexDirection: 'column', gap: 4, minWidth: 0 }}>
                     <span className="serif" style={{ fontSize: 21 }}>{p.nombre}</span>
-                    <span style={{ fontSize: 12, color: 'var(--gris)' }}>{p.categoria} · {p.tipo}</span>
+                    <span style={{ fontSize: 12, color: 'var(--gris)' }}>{p.categoria}</span>
                   </span>
                   <span style={{ fontSize: 11, letterSpacing: '.14em', textTransform: 'uppercase', color: 'var(--oro)' }}>Ver →</span>
                 </Link>

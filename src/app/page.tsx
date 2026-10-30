@@ -20,6 +20,9 @@ const FOTOS_CARRUSEL = [
 
 const retraso = (s: number) => ({ '--retraso': `${s}s` }) as React.CSSProperties;
 
+/** Posiciones del catálogo que se muestran en la selección de la portada. */
+const SELECCION = [20, 110, 230, 340, 450];
+
 export default async function Inicio() {
   const [perfumes, destacados] = await Promise.all([listarProductos('Perfumes'), productosDestacados()]);
 
@@ -194,13 +197,13 @@ export default async function Inicio() {
               <FrascoPerfume />
               <span className="capa-rotulo" style={{ position: 'absolute', left: 18, top: 16, pointerEvents: 'none', fontSize: 10, letterSpacing: '.1em' }}>Tocá el frasco</span>
             </div>
-            {perfumes.slice(0, 5).map((p) => (
+            {SELECCION.flatMap((i) => perfumes[i] ?? []).map((p) => (
               <Link key={p.slug} href={rutaProducto(p)} className="seleccion-item">
                 <span className="zoom-fondo" />
-                <span className="ph-texto item-foto">{p.foto}</span>
+                <img src={p.foto} alt="" className="item-foto" loading="lazy" />
                 <span className="item-pie">
                   <span style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-                    <span className="item-tipo">{p.tipo}</span>
+                    <span className="item-tipo">{p.categoria}</span>
                     <span className="item-nombre">{p.nombre}</span>
                   </span>
                   <span style={{ fontSize: 12, color: 'var(--oro)', whiteSpace: 'nowrap' }}>Consultar precio</span>

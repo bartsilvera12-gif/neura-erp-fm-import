@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
-import { etiquetaPrecio, rutaProducto, type Producto } from '@/lib/catalogo/tipos';
+import { ETIQUETA_PRECIO, rutaProducto, type Producto } from '@/lib/catalogo/tipos';
 import { enlaceWhatsapp } from '@/lib/sitio';
 import { useTienda } from '@/lib/tienda/contexto';
 import { mensajeConsulta } from '@/lib/tienda/mensajes';
@@ -52,10 +52,10 @@ export function Consultas({ productos }: { productos: Producto[] }) {
             <div style={{ display: 'flex', flexDirection: 'column', borderTop: '1px solid var(--negro)' }}>
               {items.map(({ p, cantidad }) => (
                 <div key={p.slug} className="linea-carrito">
-                  <Link href={rutaProducto(p)} className="miniatura" aria-label={p.nombre} />
+                  <Link href={rutaProducto(p)} className="miniatura" aria-label={p.nombre}><img src={p.foto} alt="" loading="lazy" /></Link>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: 8, minWidth: 0 }}>
                     <Link href={rutaProducto(p)} className="serif" style={{ fontSize: 21, lineHeight: 1.1, textDecoration: 'none', color: 'var(--negro)' }}>{p.nombre}</Link>
-                    <span style={{ fontSize: 12.5, color: 'var(--texto-3)' }}>{p.categoria} · {p.presentacion} · {etiquetaPrecio(p)}</span>
+                    <span style={{ fontSize: 12.5, color: 'var(--texto-3)' }}>{[p.categoria, p.presentacion, ETIQUETA_PRECIO].filter(Boolean).join(' · ')}</span>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 16, flexWrap: 'wrap' }}>
                       <div className="contador">
                         <button type="button" onClick={() => cambiar(p.slug, -1)} aria-label="Restar">−</button>

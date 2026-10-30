@@ -61,7 +61,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       <body>
         <ProveedorTienda>
           <div className="sitio">
-            <Encabezado productos={productos} />
+            <Encabezado productos={productos.map(({ slug, nombre, categoria }) => ({ slug, nombre, categoria }))} />
             {children}
             <Pie />
           </div>

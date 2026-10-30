@@ -7,6 +7,7 @@ import { enlaceWhatsapp } from '@/lib/sitio';
 import { useTienda } from '@/lib/tienda/contexto';
 import { mensajeMayorista, type SolicitudMayorista } from '@/lib/tienda/mensajes';
 import { etiquetaAgregar } from './TarjetaProducto';
+import { VerMas } from './VerMas';
 
 export function resumenLista(lineas: number, unidades: number) {
   if (!lineas) return 'Tu lista está vacía';
@@ -36,16 +37,16 @@ export function ListaVolumen({ productos }: { productos: Producto[] }) {
         </div>
       </div>
       <div style={{ display: 'flex', flexDirection: 'column', borderTop: '1px solid var(--negro)' }}>
-        {productos
-          .filter((p) => categoria === 'Todos' || p.categoria === categoria)
-          .map((p) => {
+        <VerMas key={categoria} items={productos.filter((p) => categoria === 'Todos' || p.categoria === categoria)} tanda={12}>
+          {(visibles) =>
+            visibles.map((p) => {
             const enLista = tiene(p.slug);
             return (
               <div key={p.slug} className="fila-volumen">
-                <Link href={rutaProducto(p)} className="miniatura" aria-label={p.nombre} />
+                <Link href={rutaProducto(p)} className="miniatura" aria-label={p.nombre}><img src={p.foto} alt="" loading="lazy" /></Link>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 3, minWidth: 0 }}>
                   <Link href={rutaProducto(p)} className="serif" style={{ fontSize: 20, textDecoration: 'none', color: 'var(--negro)' }}>{p.nombre}</Link>
-                  <span style={{ fontSize: 12.5, color: 'var(--texto-3)' }}>{p.categoria} · {p.tipo} · {p.presentacion}</span>
+                  <span style={{ fontSize: 12.5, color: 'var(--texto-3)' }}>{[p.categoria, p.presentacion].filter(Boolean).join(' · ')}</span>
                 </div>
                 <div className="contador">
                   <button type="button" onClick={() => cambiar(p.slug, -1)} aria-label="Restar">−</button>
@@ -57,7 +58,9 @@ export function ListaVolumen({ productos }: { productos: Producto[] }) {
                 </button>
               </div>
             );
-          })}
+          })
+          }
+        </VerMas>
       </div>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 16, flexWrap: 'wrap', background: 'var(--negro)', color: 'var(--crema)', padding: '18px 22px' }}>
         <span style={{ fontSize: 15 }}>{resumenLista(lineas.length, unidades)}</span>

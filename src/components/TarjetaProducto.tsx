@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
-import { etiquetaPrecio, rutaProducto, type Producto } from '@/lib/catalogo/tipos';
+import { ETIQUETA_PRECIO, rutaProducto, type Producto } from '@/lib/catalogo/tipos';
 import { useTienda } from '@/lib/tienda/contexto';
 
 export function etiquetaAgregar(mayorista: boolean, enLista: boolean) {
@@ -20,16 +20,12 @@ export function TarjetaProducto({ producto: p, mayorista = false }: { producto: 
     <article className="tarjeta">
       <Link href={href} aria-label={p.nombre} className="tarjeta-foto">
         <div className="ph ph-claro">
-          <span className="ph-texto" style={{ fontSize: 10.5, letterSpacing: '.06em' }}>{p.foto}</span>
-        </div>
-        <div className="ph ph-claro-b">
-          <span className="ph-texto" style={{ fontSize: 10.5, letterSpacing: '.06em' }}>Segunda foto · detalle</span>
+          <img src={p.foto} alt={p.nombre} className="foto-img" loading="lazy" />
         </div>
       </Link>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 5 }}>
-        <span className="rotulo">{p.marca}</span>
         <Link href={href} className="tarjeta-nombre">{p.nombre}</Link>
-        <span style={{ fontSize: 13, color: 'var(--texto-3)' }}>{p.presentacion}</span>
+        {p.presentacion && <span style={{ fontSize: 13, color: 'var(--texto-3)' }}>{p.presentacion}</span>}
       </div>
       {mayorista && (
         <div className="contador">
@@ -39,7 +35,7 @@ export function TarjetaProducto({ producto: p, mayorista = false }: { producto: 
         </div>
       )}
       <div className="tarjeta-pie">
-        <span style={{ fontSize: 13, fontWeight: 600 }}>{etiquetaPrecio(p)}</span>
+        <span style={{ fontSize: 13, fontWeight: 600 }}>{ETIQUETA_PRECIO}</span>
         <button type="button" className="btn-texto" onClick={() => agregar(p.slug, mayorista ? cantidad : 1, p.nombre)}>
           {etiquetaAgregar(mayorista, tiene(p.slug))}
         </button>

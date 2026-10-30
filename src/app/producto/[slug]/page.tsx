@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!p) return {};
   return {
     title: p.nombre,
-    description: `${p.nombre} · ${p.categoria}, ${p.tipo}. Consultá precio y disponibilidad por WhatsApp.`,
+    description: `${p.nombre} · ${p.categoria}. Consultá precio y disponibilidad por WhatsApp.`,
     alternates: { canonical: rutaProducto(p) },
   };
 }

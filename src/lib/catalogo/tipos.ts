@@ -3,15 +3,10 @@ export type Categoria = 'Perfumes' | 'Cosmética';
 export interface Producto {
   slug: string;
   categoria: Categoria;
-  /** Eau de Parfum, Eau de Toilette… En cosmética, la subcategoría. */
-  tipo: string;
   nombre: string;
-  marca: string;
-  presentacion: string;
-  /** Sin precio publicado se muestra "Consultar precio". */
-  precio: string | null;
-  disponibilidad: string | null;
-  /** Qué foto va en el lugar del placeholder, mientras no haya fotos reales. */
+  /** Solo si el nombre del producto la trae, como "100 ml". */
+  presentacion: string | null;
+  /** URL pública de la foto en Storage. */
   foto: string;
 }
 
@@ -25,10 +20,6 @@ export function rutaProducto(p: Pick<Producto, 'slug'>) {
   return `/producto/${p.slug}/`;
 }
 
-export function etiquetaPrecio(p: Producto) {
-  return p.precio ?? 'Consultar precio';
-}
-
-export function etiquetaDisponibilidad(p: Producto) {
-  return p.disponibilidad ?? 'Disponibilidad a consultar';
-}
+/** El catálogo todavía no publica precios ni stock: se confirman por WhatsApp. */
+export const ETIQUETA_PRECIO = 'Consultar precio';
+export const ETIQUETA_DISPONIBILIDAD = 'Disponibilidad a consultar';

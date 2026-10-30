@@ -1,5 +1,0 @@
-User-Agent: *
-Allow: /
-Disallow: /consultas/
-
-Sitemap: https://fmimportpy.com/sitemap.xml

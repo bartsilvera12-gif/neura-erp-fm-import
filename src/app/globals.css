@@ -835,15 +835,8 @@ button {
     transform 0.7s var(--curva),
     opacity 0.45s ease;
 }
-.tarjeta-foto > div + div {
-  opacity: 0;
-}
 .tarjeta:hover .tarjeta-foto > div:first-child {
   transform: scale(1.035);
-  opacity: 0;
-}
-.tarjeta:hover .tarjeta-foto > div + div {
-  opacity: 1;
 }
 .tarjeta-nombre {
   font-family: var(--font-serif);
@@ -1283,8 +1276,28 @@ button {
 }
 .item-foto {
   position: absolute;
-  left: 16px;
-  top: 16px;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s var(--curva);
+}
+.seleccion-item:hover .item-foto,
+.descubrir-item:hover .item-foto {
+  transform: scale(1.03);
+}
+/* El nombre va sobre la foto: el degradé lo mantiene legible en cualquiera */
+.seleccion-item::after,
+.descubrir-item::after {
+  content: '';
+  position: absolute;
+  inset: 45% 0 0;
+  background: linear-gradient(to bottom, transparent, rgba(12, 11, 9, 0.85));
+  pointer-events: none;
+}
+.item-pie,
+.descubrir-item > span:last-child {
+  z-index: 1;
 }
 .item-pie {
   position: absolute;
@@ -1969,12 +1982,25 @@ button {
   .fila-volumen {
     grid-template-columns: 56px minmax(0, 1fr);
   }
+  .fila-volumen > .contador {
+    justify-self: start;
+    grid-column: 1 / -1;
+  }
+  .fila-volumen > .btn-sumar {
+    grid-column: 1 / -1;
+  }
 }
 .miniatura {
   display: block;
   width: 56px;
   height: 70px;
   background: repeating-linear-gradient(135deg, #e2dacb 0 8px, #ebe5d9 8px 16px);
+}
+.miniatura img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 .fondo-negro .miniatura {
   background: repeating-linear-gradient(135deg, #1b1915 0 8px, #24211b 8px 16px);

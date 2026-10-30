@@ -2,26 +2,15 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
-import { etiquetaDisponibilidad, etiquetaPrecio, rutaCategoria, type Producto } from '@/lib/catalogo/tipos';
+import { ETIQUETA_DISPONIBILIDAD, ETIQUETA_PRECIO, rutaCategoria, type Producto } from '@/lib/catalogo/tipos';
 import { ACENTO_VERDE, enlaceWhatsapp } from '@/lib/sitio';
 import { useTienda } from '@/lib/tienda/contexto';
 import { mensajeProducto } from '@/lib/tienda/mensajes';
 import { TarjetaProducto } from './TarjetaProducto';
 
-const VISTAS = ['Vista frontal', 'Detalle de etiqueta', 'Packaging'];
-
 export function DetalleProducto({ producto: p, relacionados }: { producto: Producto; relacionados: Producto[] }) {
   const { agregar } = useTienda();
-  const [vista, setVista] = useState(0);
   const [cantidad, setCantidad] = useState(1);
-
-  const info = [
-    ['Descripción', 'A completar con la información del proveedor.'],
-    ['Características', 'A completar.'],
-    ['Presentación', p.presentacion],
-    ['Marca', p.marca],
-    ['Modo de uso', 'Según indicaciones del envase.'],
-  ];
 
   return (
     <section className="fondo-marfil" data-screen-label="Detalle de producto" style={{ padding: 'clamp(20px,3vw,40px) var(--gutter) clamp(56px,7vw,100px)' }}>
@@ -35,34 +24,19 @@ export function DetalleProducto({ producto: p, relacionados }: { producto: Produ
         </nav>
 
         <div className="ficha">
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-            <div className="ph ph-claro" style={{ aspectRatio: '4 / 5', padding: 18 }}>
-              <span className="ph-texto" style={{ fontSize: 11 }}>Fotografía principal · {VISTAS[vista].toLowerCase()}</span>
-            </div>
-            <div className="miniaturas-galeria">
-              {VISTAS.map((v, i) => (
-                <button key={v} type="button" aria-label={v} aria-pressed={vista === i} onClick={() => setVista(i)}>
-                  <span className="ph-texto" style={{ fontSize: 9.5, letterSpacing: '.06em', color: '#7a7468' }}>{v}</span>
-                </button>
-              ))}
-            </div>
+          <div className="ph ph-claro" style={{ aspectRatio: '4 / 5' }}>
+            <img src={p.foto} alt={p.nombre} className="foto-img" style={{ objectFit: 'contain' }} />
           </div>
 
           <div className="sticky-escritorio" style={{ display: 'flex', flexDirection: 'column', gap: 22, position: 'sticky', top: 110 }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-              <span className="sobretitulo" style={{ letterSpacing: '.18em', color: 'var(--texto-3)' }}>{p.marca}</span>
               <h1 className="serif" style={{ margin: 0, fontSize: 'clamp(38px,4.4vw,68px)', lineHeight: 0.98, letterSpacing: '-.015em' }}>{p.nombre}</h1>
-              <span style={{ fontSize: 14, color: 'var(--texto-2)' }}>{p.categoria} · {p.tipo}</span>
+              <span style={{ fontSize: 14, color: 'var(--texto-2)' }}>{p.categoria}</span>
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', borderTop: '1px solid var(--negro)' }}>
-              <div className="fila-ficha"><span style={{ color: 'var(--texto-3)' }}>Precio</span><span style={{ fontWeight: 600 }}>{etiquetaPrecio(p)}</span></div>
-              <div className="fila-ficha"><span style={{ color: 'var(--texto-3)' }}>Disponibilidad</span><span>{etiquetaDisponibilidad(p)}</span></div>
-              <label className="fila-ficha" style={{ padding: '10px 0' }}>
-                <span style={{ color: 'var(--texto-3)' }}>Presentación</span>
-                <select className="select" style={{ fontSize: 14 }}>
-                  <option>{p.presentacion}</option>
-                </select>
-              </label>
+              <div className="fila-ficha"><span style={{ color: 'var(--texto-3)' }}>Precio</span><span style={{ fontWeight: 600 }}>{ETIQUETA_PRECIO}</span></div>
+              <div className="fila-ficha"><span style={{ color: 'var(--texto-3)' }}>Disponibilidad</span><span>{ETIQUETA_DISPONIBILIDAD}</span></div>
+              {p.presentacion && <div className="fila-ficha"><span style={{ color: 'var(--texto-3)' }}>Presentación</span><span>{p.presentacion}</span></div>}
             </div>
             <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', alignItems: 'stretch' }}>
               <div className="contador" style={{ borderColor: 'var(--negro)' }}>
@@ -81,11 +55,6 @@ export function DetalleProducto({ producto: p, relacionados }: { producto: Produ
             <p style={{ margin: 0, fontSize: 13, lineHeight: 1.5, color: 'var(--texto-3)' }}>
               Sin pagos en línea. Tu pedido queda sujeto a confirmación comercial de FM Importados.
             </p>
-            <div style={{ display: 'flex', flexDirection: 'column', borderTop: '1px solid var(--negro)', marginTop: 8 }}>
-              {info.map(([k, v]) => (
-                <div key={k} className="fila-info"><span style={{ color: 'var(--texto-3)' }}>{k}</span><span>{v}</span></div>
-              ))}
-            </div>
           </div>
         </div>
 

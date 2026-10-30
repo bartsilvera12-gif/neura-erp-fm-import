@@ -11,7 +11,8 @@ node_modules/
 
 # Next.js
 .next/
-# /out se COMMITEA a propósito: es lo que Hostinger publica.
-# El .htaccess de la raíz mapea el dominio a esa carpeta.
 next-env.d.ts
 *.tsbuildinfo
+
+# Coolify compila en el build: el export no se versiona.
+out/
