@@ -13,8 +13,10 @@ import { resumenLista } from './Mayoristas';
  * El carrito. No cobra: crea un pedido en el ERP, que FM Importados confirma a
  * mano. WhatsApp queda como alternativa.
  */
-export function Consultas({ productos }: { productos: Producto[] }) {
-  const { lineas, unidades, lista, cambiar, quitar, vaciar, vivo } = useTienda();
+export function Consultas({ productos: copia }: { productos: Producto[] }) {
+  const { lineas, unidades, lista, cambiar, quitar, vaciar, vivo, productosVivos } = useTienda();
+  // La copia de la página puede tener unos segundos: un producto recién publicado no estaría.
+  const productos = productosVivos.length ? productosVivos : copia;
   const [mayorista, setMayorista] = useState(false);
   const [negocio, setNegocio] = useState('');
   const [ciudad, setCiudad] = useState('');

@@ -20,6 +20,8 @@ interface Tienda {
   avisar: (texto: string) => void;
   /** Precio y disponibilidad del ERP; sin respuesta, lo del build. */
   vivo: (p: Pick<Producto, 'sku' | 'precio'>) => { precio: number; disponible: boolean };
+  /** El catálogo recién leído del ERP: incluye lo publicado hace segundos. */
+  productosVivos: Producto[];
 }
 
 const Contexto = createContext<Tienda | null>(null);
@@ -31,13 +33,18 @@ export function ProveedorTienda({ children }: { children: React.ReactNode }) {
   const ruta = usePathname();
   const temporizador = useRef<ReturnType<typeof setTimeout>>(undefined);
   const [catalogo, setCatalogo] = useState<Record<string, { precio: number; disponible: boolean }>>({});
+  const [productosVivos, setProductosVivos] = useState<Producto[]>([]);
 
   useEffect(() => {
     setLineas(leerConsultas());
     setLista(true);
     fetch(`${SITIO.erpUrl}/api/public/catalogo`)
       .then((r) => r.json())
-      .then((j) => j?.success && setCatalogo(j.data))
+      .then((j) => {
+        if (!j?.success) return;
+        setCatalogo(j.data);
+        setProductosVivos(j.productos ?? []);
+      })
       .catch(() => {});
   }, []);
 
@@ -75,10 +82,11 @@ export function ProveedorTienda({ children }: { children: React.ReactNode }) {
       quitar: (slug) => actualizar((prev) => prev.filter((l) => l.slug !== slug)),
       vaciar: () => actualizar(() => []),
       vivo: (p) => catalogo[p.sku] ?? { precio: p.precio, disponible: true },
+      productosVivos,
       tiene: (slug) => lineas.some((l) => l.slug === slug),
       avisar,
     }),
-    [lineas, lista, actualizar, avisar, catalogo],
+    [lineas, lista, actualizar, avisar, catalogo, productosVivos],
   );
 
   return (
