@@ -3,6 +3,8 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
+import type { Producto } from '@/lib/catalogo/tipos';
+import { SITIO } from '@/lib/sitio';
 import { guardarConsultas, leerConsultas, type LineaConsulta } from './almacenamiento';
 
 interface Tienda {
@@ -16,6 +18,8 @@ interface Tienda {
   vaciar: () => void;
   tiene: (slug: string) => boolean;
   avisar: (texto: string) => void;
+  /** Precio y disponibilidad del ERP; sin respuesta, lo del build. */
+  vivo: (p: Pick<Producto, 'sku' | 'precio'>) => { precio: number; disponible: boolean };
 }
 
 const Contexto = createContext<Tienda | null>(null);
@@ -26,10 +30,15 @@ export function ProveedorTienda({ children }: { children: React.ReactNode }) {
   const [aviso, setAviso] = useState<string | null>(null);
   const ruta = usePathname();
   const temporizador = useRef<ReturnType<typeof setTimeout>>(undefined);
+  const [catalogo, setCatalogo] = useState<Record<string, { precio: number; disponible: boolean }>>({});
 
   useEffect(() => {
     setLineas(leerConsultas());
     setLista(true);
+    fetch(`${SITIO.erpUrl}/api/public/catalogo`)
+      .then((r) => r.json())
+      .then((j) => j?.success && setCatalogo(j.data))
+      .catch(() => {});
   }, []);
 
   const actualizar = useCallback((f: (l: LineaConsulta[]) => LineaConsulta[]) => {
@@ -65,10 +74,11 @@ export function ProveedorTienda({ children }: { children: React.ReactNode }) {
         ),
       quitar: (slug) => actualizar((prev) => prev.filter((l) => l.slug !== slug)),
       vaciar: () => actualizar(() => []),
+      vivo: (p) => catalogo[p.sku] ?? { precio: p.precio, disponible: true },
       tiene: (slug) => lineas.some((l) => l.slug === slug),
       avisar,
     }),
-    [lineas, lista, actualizar, avisar],
+    [lineas, lista, actualizar, avisar, catalogo],
   );
 
   return (
@@ -77,7 +87,7 @@ export function ProveedorTienda({ children }: { children: React.ReactNode }) {
       {aviso && (
         <div role="status" className={ruta.startsWith('/consultas') && lineas.length ? 'aviso sobre-barra' : 'aviso'}>
           <span>{aviso}</span>
-          <Link href="/consultas/">Ver lista →</Link>
+          <Link href="/consultas/">Ver carrito →</Link>
         </div>
       )}
     </Contexto.Provider>

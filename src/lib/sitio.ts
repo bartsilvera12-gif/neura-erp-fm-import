@@ -1,6 +1,6 @@
 /**
  * Datos comerciales de FM Importados. Lo que está vacío todavía no lo confirmó
- * el cliente: la web lo muestra como "Por confirmar" en vez de inventarlo.
+ * el cliente: la web no lo muestra en vez de inventarlo.
  */
 export const SITIO = {
   nombre: 'FM Importados',
@@ -17,8 +17,8 @@ export const SITIO = {
   direccion: '',
   horarios: '',
   /** La cuenta todavía no existe: hay que crearla con el cliente. */
-  instagram: 'https://www.instagram.com/fm_importadospy',
-  instagramUsuario: '@fm_importadospy',
+  instagram: '',
+  instagramUsuario: '',
   facebook: '',
 } as const;
 
@@ -34,7 +34,7 @@ export const CONDICIONES_MAYORISTAS = {
  * Marcas de "pendiente de confirmación" sobre textos y datos provisorios.
  * Se apaga cuando el cliente confirme el contenido real.
  */
-export const MOSTRAR_PENDIENTES = true;
+export const MOSTRAR_PENDIENTES = false;
 
 /** Punto verde del logo junto a lo mayorista. En el diseño quedó apagado. */
 export const ACENTO_VERDE = false;

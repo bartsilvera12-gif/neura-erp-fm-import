@@ -7,12 +7,13 @@ import { useTienda } from '@/lib/tienda/contexto';
 
 export function etiquetaAgregar(mayorista: boolean, enLista: boolean) {
   if (mayorista) return enLista ? 'Sumar a cotización' : 'Añadir a cotización';
-  return enLista ? 'Sumar a mi consulta' : 'Agregar a mi consulta';
+  return enLista ? 'Sumar al carrito' : 'Agregar al carrito';
 }
 
 /** En modo mayorista la tarjeta deja elegir cantidad antes de sumar. */
 export function TarjetaProducto({ producto: p, mayorista = false }: { producto: Producto; mayorista?: boolean }) {
-  const { agregar, tiene } = useTienda();
+  const { agregar, tiene, vivo } = useTienda();
+  const { precio, disponible } = vivo(p);
   const [cantidad, setCantidad] = useState(1);
   const href = rutaProducto(p);
 
@@ -35,10 +36,14 @@ export function TarjetaProducto({ producto: p, mayorista = false }: { producto: 
         </div>
       )}
       <div className="tarjeta-pie">
-        <span style={{ fontSize: 13, fontWeight: 600 }}>{mayorista ? ETIQUETA_PRECIO_MAYOR : formatoPrecio(p.precio)}</span>
-        <button type="button" className="btn-texto" onClick={() => agregar(p.slug, mayorista ? cantidad : 1, p.nombre)}>
-          {etiquetaAgregar(mayorista, tiene(p.slug))}
-        </button>
+        <span style={{ fontSize: 13, fontWeight: 600 }}>{mayorista ? ETIQUETA_PRECIO_MAYOR : formatoPrecio(precio)}</span>
+        {disponible ? (
+          <button type="button" className="btn-texto" onClick={() => agregar(p.slug, mayorista ? cantidad : 1, p.nombre)}>
+            {etiquetaAgregar(mayorista, tiene(p.slug))}
+          </button>
+        ) : (
+          <span style={{ fontSize: 13, color: 'var(--texto-3)' }}>Sin stock</span>
+        )}
       </div>
     </article>
   );

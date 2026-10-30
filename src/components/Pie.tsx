@@ -45,7 +45,7 @@ export function Pie() {
             <a href={enlaceWhatsapp()} target="_blank" rel="noopener">WhatsApp {SITIO.whatsappEtiqueta}</a>
             <a href={correo}>{SITIO.correo}</a>
             <div style={{ display: 'flex', gap: 10, marginTop: 6 }}>
-              <a href={SITIO.instagram} target="_blank" rel="noopener" aria-label="Instagram de FM Importados" title={SITIO.instagramUsuario} className="red-social"><IconoInstagram /></a>
+              {SITIO.instagram && <a href={SITIO.instagram} target="_blank" rel="noopener" aria-label="Instagram de FM Importados" title={SITIO.instagramUsuario} className="red-social"><IconoInstagram /></a>}
               <a href={enlaceWhatsapp()} target="_blank" rel="noopener" aria-label="WhatsApp de FM Importados" title={SITIO.whatsappEtiqueta} className="red-social"><IconoWhatsapp /></a>
               <a href={correo} aria-label="Correo de FM Importados" title={SITIO.correo} className="red-social"><IconoCorreo /></a>
             </div>

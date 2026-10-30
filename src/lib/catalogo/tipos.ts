@@ -29,6 +29,3 @@ export function formatoPrecio(n: number) {
 }
 
 export const ETIQUETA_PRECIO_MAYOR = 'Se informa al cotizar';
-
-/** El stock no se publica: se confirma por WhatsApp. */
-export const ETIQUETA_DISPONIBILIDAD = 'Disponibilidad a consultar';

@@ -14,7 +14,7 @@ import { resumenLista } from './Mayoristas';
  * mano. WhatsApp queda como alternativa.
  */
 export function Consultas({ productos }: { productos: Producto[] }) {
-  const { lineas, unidades, lista, cambiar, quitar, vaciar } = useTienda();
+  const { lineas, unidades, lista, cambiar, quitar, vaciar, vivo } = useTienda();
   const [mayorista, setMayorista] = useState(false);
   const [negocio, setNegocio] = useState('');
   const [ciudad, setCiudad] = useState('');
@@ -104,7 +104,7 @@ export function Consultas({ productos }: { productos: Producto[] }) {
                   <Link href={rutaProducto(p)} className="miniatura" aria-label={p.nombre}><img src={p.foto} alt="" loading="lazy" /></Link>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: 8, minWidth: 0 }}>
                     <Link href={rutaProducto(p)} className="serif" style={{ fontSize: 21, lineHeight: 1.1, textDecoration: 'none', color: 'var(--negro)' }}>{p.nombre}</Link>
-                    <span style={{ fontSize: 12.5, color: 'var(--texto-3)' }}>{[p.categoria, p.presentacion, mayorista ? null : formatoPrecio(p.precio)].filter(Boolean).join(' · ')}</span>
+                    <span style={{ fontSize: 12.5, color: 'var(--texto-3)' }}>{[p.categoria, p.presentacion, mayorista ? null : formatoPrecio(vivo(p).precio)].filter(Boolean).join(' · ')}</span>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 16, flexWrap: 'wrap' }}>
                       <div className="contador">
                         <button type="button" onClick={() => cambiar(p.slug, -1)} aria-label="Restar">−</button>
@@ -120,7 +120,7 @@ export function Consultas({ productos }: { productos: Producto[] }) {
                       </button>
                     </div>
                   </div>
-                  <span style={{ fontSize: 13, color: 'var(--texto-3)', whiteSpace: 'nowrap' }} className="solo-escritorio">{mayorista ? ETIQUETA_PRECIO_MAYOR : formatoPrecio(p.precio * cantidad)}</span>
+                  <span style={{ fontSize: 13, color: 'var(--texto-3)', whiteSpace: 'nowrap' }} className="solo-escritorio">{mayorista ? ETIQUETA_PRECIO_MAYOR : formatoPrecio(vivo(p).precio * cantidad)}</span>
                 </div>
               ))}
             </div>
@@ -152,7 +152,7 @@ export function Consultas({ productos }: { productos: Producto[] }) {
                 {[
                   ['Productos', lineas.length],
                   ['Unidades', unidades],
-                  ['Subtotal estimado', mayorista ? ETIQUETA_PRECIO_MAYOR : formatoPrecio(items.reduce((t, i) => t + i.p.precio * i.cantidad, 0))],
+                  ['Subtotal estimado', mayorista ? ETIQUETA_PRECIO_MAYOR : formatoPrecio(items.reduce((t, i) => t + vivo(i.p).precio * i.cantidad, 0))],
                 ].map(([k, v]) => (
                   <div key={k} style={{ display: 'flex', justifyContent: 'space-between', padding: '10px 0', borderBottom: '1px solid var(--linea-oscura)' }}>
                     <span style={{ color: 'var(--gris-medio)' }}>{k}</span>

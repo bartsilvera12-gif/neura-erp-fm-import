@@ -2,14 +2,15 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
-import { ETIQUETA_DISPONIBILIDAD, formatoPrecio, rutaCategoria, type Producto } from '@/lib/catalogo/tipos';
+import { formatoPrecio, rutaCategoria, type Producto } from '@/lib/catalogo/tipos';
 import { ACENTO_VERDE, enlaceWhatsapp } from '@/lib/sitio';
 import { useTienda } from '@/lib/tienda/contexto';
 import { mensajeProducto } from '@/lib/tienda/mensajes';
 import { TarjetaProducto } from './TarjetaProducto';
 
 export function DetalleProducto({ producto: p, relacionados }: { producto: Producto; relacionados: Producto[] }) {
-  const { agregar } = useTienda();
+  const { agregar, vivo } = useTienda();
+  const { precio, disponible } = vivo(p);
   const [cantidad, setCantidad] = useState(1);
 
   return (
@@ -34,8 +35,8 @@ export function DetalleProducto({ producto: p, relacionados }: { producto: Produ
               <span style={{ fontSize: 14, color: 'var(--texto-2)' }}>{p.categoria}</span>
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', borderTop: '1px solid var(--negro)' }}>
-              <div className="fila-ficha"><span style={{ color: 'var(--texto-3)' }}>Precio</span><span style={{ fontWeight: 600 }}>{formatoPrecio(p.precio)}</span></div>
-              <div className="fila-ficha"><span style={{ color: 'var(--texto-3)' }}>Disponibilidad</span><span>{ETIQUETA_DISPONIBILIDAD}</span></div>
+              <div className="fila-ficha"><span style={{ color: 'var(--texto-3)' }}>Precio</span><span style={{ fontWeight: 600 }}>{formatoPrecio(precio)}</span></div>
+              <div className="fila-ficha"><span style={{ color: 'var(--texto-3)' }}>Disponibilidad</span><span>{disponible ? 'Disponible' : 'Sin stock'}</span></div>
               {p.presentacion && <div className="fila-ficha"><span style={{ color: 'var(--texto-3)' }}>Presentación</span><span>{p.presentacion}</span></div>}
             </div>
             <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', alignItems: 'stretch' }}>
@@ -44,8 +45,8 @@ export function DetalleProducto({ producto: p, relacionados }: { producto: Produ
                 <span>{cantidad}</span>
                 <button type="button" onClick={() => setCantidad((c) => c + 1)} aria-label="Sumar" style={{ width: 48, height: 54 }}>+</button>
               </div>
-              <button type="button" className="btn btn-negro" style={{ flex: 1, minWidth: 200, height: 56 }} onClick={() => agregar(p.slug, cantidad, p.nombre)}>
-                Agregar a mi consulta
+              <button type="button" disabled={!disponible} className="btn btn-negro" style={{ flex: 1, minWidth: 200, height: 56 }} onClick={() => agregar(p.slug, cantidad, p.nombre)}>
+                {disponible ? 'Agregar al carrito' : 'Sin stock'}
               </button>
             </div>
             <a href={enlaceWhatsapp(mensajeProducto(p, cantidad))} target="_blank" rel="noopener" className="btn btn-borde-negro" style={{ height: 54 }}>
