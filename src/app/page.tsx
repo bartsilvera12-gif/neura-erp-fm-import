@@ -1,7 +1,7 @@
 import Link from 'next/link';
-import { FondoDegradado } from '@/components/FondoDegradado';
 import { FrascoPerfume } from '@/components/FrascoPerfume';
 import { Logo } from '@/components/Iconos';
+import { MetalLiquido } from '@/components/MetalLiquido';
 import { Foto } from '@/components/Pendiente';
 import { TarjetaProducto } from '@/components/TarjetaProducto';
 import { listarProductos, productosDestacados } from '@/lib/catalogo/servicio';
@@ -17,7 +17,7 @@ export default async function Inicio() {
     <>
       {/* Escritorio: el titular con fotos intercaladas y la barra de dos formas de compra */}
       <section className="hero fondo-negro solo-escritorio" data-screen-label="Inicio · Showroom">
-        <FondoDegradado />
+        <MetalLiquido />
         <div className="hero-cuerpo">
           <h1>
             <span className="hero-linea aparece" style={retraso(0.2)}>
@@ -79,7 +79,7 @@ export default async function Inicio() {
 
       {/* Celular */}
       <section className="hero-movil fondo-negro solo-movil" data-screen-label="Inicio · Hero mobile">
-        <FondoDegradado />
+        <MetalLiquido />
         <div className="aparece" style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
           <p className="serif" style={{ margin: 0, fontSize: 'clamp(56px,17vw,76px)', lineHeight: 0.86, letterSpacing: '-.02em', textTransform: 'uppercase' }}>
             Lo que<br />buscás.

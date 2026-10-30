@@ -888,24 +888,30 @@ button {
 
 /* ───────── Inicio ───────── */
 
-.fondo-degradado {
+.metal-liquido {
   position: absolute;
   inset: 0;
   overflow: hidden;
+  background: radial-gradient(circle at 60% 40%, #3a2c14, var(--negro) 70%);
 }
-/* El degradado es claro y el texto del hero es crema: el velo mantiene el contraste */
-.fondo-degradado::after {
+.metal-liquido canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+/* Velo para que el texto crema se lea sobre los brillos del metal */
+.metal-liquido::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: rgba(12, 11, 9, 0.62);
+  background: rgba(12, 11, 9, 0.2);
 }
 .hero,
 .hero-movil {
   position: relative;
 }
-.hero > :not(.fondo-degradado),
-.hero-movil > :not(.fondo-degradado) {
+.hero > :not(.metal-liquido),
+.hero-movil > :not(.metal-liquido) {
   position: relative;
   z-index: 1;
 }
