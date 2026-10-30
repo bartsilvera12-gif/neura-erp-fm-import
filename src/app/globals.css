@@ -1475,6 +1475,175 @@ button {
   }
 }
 
+.nosotros-hero {
+  padding: clamp(48px, 7vw, 104px) var(--gutter);
+}
+.nosotros-hero-grilla {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  align-items: end;
+  gap: clamp(40px, 6vw, 96px);
+}
+.nosotros-hero-texto {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(20px, 2.6vw, 36px);
+}
+.nosotros-hero-texto h1 {
+  margin: 0;
+  font-size: clamp(48px, 7.4vw, 124px);
+  font-weight: 400;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+.nosotros-hero-texto p {
+  margin: 0;
+  max-width: 540px;
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--gris-claro);
+}
+.nosotros-hero-fotos {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  align-items: end;
+  gap: 4px;
+}
+.nosotros-hero-fotos .ph:first-child {
+  aspect-ratio: 3 / 4.6;
+}
+.nosotros-hero-fotos .ph:last-child {
+  aspect-ratio: 3 / 3.6;
+}
+.nosotros-seccion {
+  padding: clamp(64px, 9vw, 136px) var(--gutter);
+}
+.nosotros-lineas {
+  display: flex;
+  flex-direction: column;
+  margin-top: 24px;
+  border-top: 1px solid var(--negro);
+}
+.nosotros-lineas a {
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1.2fr) minmax(0, 1fr) 32px;
+  align-items: center;
+  gap: 16px;
+  padding: clamp(18px, 2.4vw, 32px) 0;
+  border-bottom: 1px solid var(--negro);
+  text-decoration: none;
+  color: var(--negro);
+}
+.nosotros-linea-titulo {
+  font-size: clamp(40px, 6.4vw, 104px);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+.nosotros-lineas a:hover .nosotros-linea-titulo {
+  font-style: italic;
+}
+.nosotros-lineas a:hover .sobre-flecha {
+  transform: translateX(6px);
+}
+.nosotros-subtitulo {
+  margin: 20px 0 clamp(40px, 5vw, 72px);
+  font-size: clamp(36px, 5vw, 80px);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+.nosotros-pasos {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(28px, 4vw, 64px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.nosotros-pasos li {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-top: 20px;
+  border-top: 1px solid var(--oro);
+}
+.nosotros-paso-numero {
+  font-style: italic;
+  font-size: clamp(40px, 4.4vw, 64px);
+  line-height: 1;
+  color: var(--oro);
+}
+.nosotros-paso-titulo {
+  font-size: clamp(26px, 2.6vw, 38px);
+  line-height: 1.1;
+}
+.nosotros-pasos p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--gris-claro);
+}
+.nosotros-caminos {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 4px;
+  background: var(--negro);
+}
+.nosotros-caminos a {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 12px;
+  min-height: clamp(320px, 38vw, 560px);
+  padding: clamp(24px, 3vw, 48px);
+  overflow: hidden;
+  text-decoration: none;
+  color: var(--marfil);
+}
+/* Velo oscuro para que el texto se lea sobre cualquier foto */
+.nosotros-caminos a::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(12, 11, 9, 0.88), rgba(12, 11, 9, 0.15) 70%);
+}
+.nosotros-caminos .foto-img {
+  transition: transform 1.2s var(--curva);
+}
+.nosotros-caminos a:hover .foto-img {
+  transform: scale(1.04);
+}
+.nosotros-caminos span {
+  position: relative;
+  z-index: 1;
+}
+.nosotros-caminos .serif {
+  font-size: clamp(28px, 3.2vw, 48px);
+  line-height: 1.1;
+  max-width: 560px;
+}
+@media (max-width: 899px) {
+  .nosotros-hero-grilla,
+  .nosotros-pasos,
+  .nosotros-caminos {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .nosotros-lineas a {
+    grid-template-columns: 30px minmax(0, 1fr) 24px;
+    gap: 4px 10px;
+  }
+  .nosotros-lineas .sobre-bajada {
+    grid-column: 2;
+    grid-row: 2;
+  }
+  .nosotros-lineas .sobre-flecha {
+    grid-column: 3;
+    grid-row: 1;
+  }
+}
+
 .franja-fotos {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr));
@@ -1749,27 +1918,6 @@ button {
 }
 
 /* ───────── Nosotros ───────── */
-
-.nosotros-fotos {
-  grid-template-columns: 1.6fr 1fr;
-}
-@media (max-width: 759px) {
-  .nosotros-fotos {
-    grid-template-columns: 1fr;
-  }
-}
-.nosotros-enlace {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  padding: 32px 0;
-  text-decoration: none;
-  color: var(--negro);
-  transition: color 0.25s;
-}
-.nosotros-enlace:hover {
-  color: var(--oro-oscuro);
-}
 
 /* ───────── Contacto ───────── */
 

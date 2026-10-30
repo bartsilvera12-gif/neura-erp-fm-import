@@ -8,34 +8,91 @@ export const metadata: Metadata = {
   alternates: { canonical: '/nosotros/' },
 };
 
+const LINEAS = [
+  ['01', 'Perfumes', 'Fragancias para uso personal y para reventa.', '/perfumes/'],
+  ['02', 'Cosmética', 'Cuidado y belleza en un solo lugar.', '/cosmetica/'],
+  ['03', 'Importados', 'Una selección de productos para descubrir.', '/catalogo/'],
+];
+
+const PASOS = [
+  ['Elegís', 'Recorré el catálogo y armá tu lista, sea un producto o varias cajas.'],
+  ['Consultás', 'Tu lista nos llega por WhatsApp, ya escrita, sin pagar nada en la web.'],
+  ['Coordinamos', 'Te confirmamos disponibilidad, precio y entrega directamente.'],
+];
+
 export default function PaginaNosotros() {
   return (
-    <section className="fondo-marfil" data-screen-label="Nosotros" style={{ padding: 'clamp(56px,8vw,120px) var(--gutter)' }}>
-      <div className="contenedor-angosto" style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(48px,6vw,96px)' }}>
-        <div className="grilla-flujo">
-          <h1 className="sobretitulo oro-oscuro" style={{ margin: 0, fontWeight: 400 }}>Nosotros</h1>
-          <p className="serif ancho aparece" style={{ margin: 0, fontSize: 'clamp(30px,3.8vw,60px)', lineHeight: 1.12, letterSpacing: '-.01em', textWrap: 'pretty' }}>
-            FM Importados es una tienda dedicada a la comercialización de perfumes, cosméticos y productos importados, con atención tanto a compradores particulares como a clientes mayoristas.
-          </p>
+    <>
+      <section className="fondo-negro nosotros-hero" data-screen-label="Nosotros · Hero">
+        <div className="contenedor nosotros-hero-grilla">
+          <div className="nosotros-hero-texto aparece">
+            <span className="sobretitulo oro">Nosotros</span>
+            <h1 className="serif">
+              Importados para vos <em className="oro">y para tu negocio.</em>
+            </h1>
+            <p>
+              FM Importados es una tienda dedicada a la comercialización de perfumes, cosméticos y productos importados, con atención tanto a compradores particulares como a clientes mayoristas.
+            </p>
+          </div>
+          <div className="nosotros-hero-fotos">
+            <Foto texto="Perfume sobre fondo cálido" src="/fotos/hero-perfume.webp" className="telon-y" />
+            <Foto texto="Cajas de mercadería" src="/fotos/mayorista-volumen.webp" className="telon-y" style={{ '--retraso': '.2s' } as React.CSSProperties} />
+          </div>
         </div>
-        <div className="nosotros-fotos" style={{ display: 'grid', gap: 4 }}>
-          <Foto texto="Fotografía real del local" clara className="telon-x" style={{ height: 'clamp(260px,38vw,560px)', alignItems: 'flex-start', padding: 16 }} />
-          <Foto texto="Equipo o mostrador" clara b className="telon-y" style={{ height: 'clamp(260px,38vw,560px)', alignItems: 'flex-start', padding: 16, '--retraso': '.25s' } as React.CSSProperties} />
+      </section>
+
+      <section className="fondo-marfil nosotros-seccion" data-screen-label="Nosotros · Qué vendemos">
+        <div className="contenedor">
+          <span className="sobretitulo oro-oscuro">Qué vendemos</span>
+          <nav className="nosotros-lineas" aria-label="Líneas de producto">
+            {LINEAS.map(([numero, titulo, bajada, href]) => (
+              <Link key={href} href={href}>
+                <span className="sobre-numero">{numero}</span>
+                <span className="serif nosotros-linea-titulo">{titulo}</span>
+                <span className="sobre-bajada">{bajada}</span>
+                <span className="sobre-flecha">→</span>
+              </Link>
+            ))}
+          </nav>
         </div>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(min(100%,380px),1fr))', borderTop: '1px solid var(--negro)' }}>
-          <Link href="/catalogo/" className="nosotros-enlace" style={{ paddingRight: 'clamp(0px,3vw,40px)' }}>
-            <span className="sobretitulo" style={{ letterSpacing: '.18em' }}>Para compradores particulares</span>
-            <span className="serif" style={{ fontSize: 'clamp(26px,2.6vw,38px)', lineHeight: 1.1 }}>Perfumes y cosmética para vos, al detalle. →</span>
-          </Link>
-          <Link href="/mayoristas/" className="nosotros-enlace">
-            <span className="sobretitulo" style={{ letterSpacing: '.18em' }}>Para negocios</span>
-            <span className="serif" style={{ fontSize: 'clamp(26px,2.6vw,38px)', lineHeight: 1.1 }}>
-              <em>Mercadería para revendedores, emprendedores y comercios. →</em>
-            </span>
-          </Link>
+      </section>
+
+      <section className="fondo-negro nosotros-seccion" data-screen-label="Nosotros · Cómo trabajamos">
+        <div className="contenedor">
+          <span className="sobretitulo oro">Cómo trabajamos</span>
+          <h2 className="serif nosotros-subtitulo">
+            Simple, directo <em className="oro">y por WhatsApp.</em>
+          </h2>
+          <ol className="nosotros-pasos">
+            {PASOS.map(([titulo, texto], i) => (
+              <li key={titulo}>
+                <span className="serif nosotros-paso-numero">{i + 1}</span>
+                <span className="serif nosotros-paso-titulo">{titulo}</span>
+                <p>{texto}</p>
+              </li>
+            ))}
+          </ol>
         </div>
-        <Pendiente grande>Texto provisional · ampliar con información real del negocio</Pendiente>
-      </div>
-    </section>
+      </section>
+
+      <section className="nosotros-caminos" data-screen-label="Nosotros · Para quién">
+        <Link href="/catalogo/">
+          <img src="/fotos/hero-perfume.webp" alt="" className="foto-img" loading="lazy" />
+          <span className="sobretitulo">Para compradores particulares</span>
+          <span className="serif">Perfumes y cosmética para vos, al detalle. →</span>
+        </Link>
+        <Link href="/mayoristas/">
+          <img src="/fotos/mayorista-empaques.webp" alt="" className="foto-img" loading="lazy" />
+          <span className="sobretitulo">Para negocios</span>
+          <span className="serif"><em>Mercadería para revendedores, emprendedores y comercios. →</em></span>
+        </Link>
+      </section>
+
+      <section className="fondo-marfil" style={{ padding: 'clamp(28px,4vw,48px) var(--gutter)' }}>
+        <div className="contenedor">
+          <Pendiente grande>Fotos y texto provisionales · reemplazar por el local, el equipo y la historia real del negocio</Pendiente>
+        </div>
+      </section>
+    </>
   );
 }
