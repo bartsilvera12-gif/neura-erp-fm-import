@@ -1,4 +1,4 @@
-:HL["/_next/static/chunks/3t3ctcal9n10d.css","style"]
+:HL["/_next/static/chunks/0hr3o08nwot-x.css","style"]
 :HL["/_next/static/media/b8dfa3d21eb22018-s.p.3lxpqujs87tck.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
 :HL["/_next/static/media/d236bb4c0caf68e4-s.p.14og3_uq6yls0.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
 :HL["/_next/static/media/d6c1ff7e86974212-s.p.40sczeszzbjw1.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
@@ -6,4 +6,4 @@
 :HL["/assets/logo.jpeg","image"]
 2:[["children",{"s":"__PAGE__","h":160}]]
 1:[["children",{"s":"perfumes","h":64,"c":"$Q2"}]]
-0:{"b":"05_2nGY4izvUMakq0O0zm","t":{"t":{"s":"","h":16,"c":"$Q1"}}}
+0:{"b":"FxghoJuyMKVFWNcufDmeQ","t":{"t":{"s":"","h":16,"c":"$Q1"}}}

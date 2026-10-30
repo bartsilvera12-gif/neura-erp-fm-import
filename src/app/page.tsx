@@ -4,9 +4,19 @@ import { Logo } from '@/components/Iconos';
 import { MetalLiquido } from '@/components/MetalLiquido';
 import { Foto } from '@/components/Pendiente';
 import { TarjetaProducto } from '@/components/TarjetaProducto';
+import { CarruselDiagonal } from '@/components/ui/CarruselDiagonal';
 import { listarProductos, productosDestacados } from '@/lib/catalogo/servicio';
 import { rutaProducto } from '@/lib/catalogo/tipos';
 import { ACENTO_VERDE } from '@/lib/sitio';
+
+const FOTOS_CARRUSEL = [
+  { src: '/fotos/hero-packaging.webp', alt: 'Perfume junto a su caja' },
+  { src: '/fotos/categoria-cosmetica.webp', alt: 'Colores de producto cosmético' },
+  { src: '/fotos/mayorista-empaques.webp', alt: 'Cajas de cosméticos' },
+  { src: '/fotos/hero-cosmetica.webp', alt: 'Perfume y maquillaje' },
+  { src: '/fotos/cosmetica-textura.webp', alt: 'Sombras y pincel' },
+  { src: '/fotos/mayorista-volumen.webp', alt: 'Cajas de mercadería' },
+];
 
 const retraso = (s: number) => ({ '--retraso': `${s}s` }) as React.CSSProperties;
 
@@ -272,6 +282,10 @@ export default async function Inicio() {
             ))}
           </div>
         </div>
+      </section>
+
+      <section className="fondo-negro" data-screen-label="Inicio · Galería">
+        <CarruselDiagonal fotos={FOTOS_CARRUSEL} />
       </section>
 
       <section className="fondo-marfil sobre" data-screen-label="Inicio · Sobre FM">

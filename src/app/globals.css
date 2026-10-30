@@ -1669,6 +1669,78 @@ button {
   }
 }
 
+@keyframes carrusel {
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+.carrusel-diagonal {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: clamp(420px, 56vw, 760px);
+  overflow: hidden;
+}
+.carrusel-diagonal::before,
+.carrusel-diagonal::after {
+  content: '';
+  position: absolute;
+  z-index: 1;
+  inset-inline: 0;
+  height: 22%;
+  pointer-events: none;
+}
+.carrusel-diagonal::before {
+  top: 0;
+  background: linear-gradient(to bottom, var(--negro), transparent);
+}
+.carrusel-diagonal::after {
+  bottom: 0;
+  background: linear-gradient(to top, var(--negro), transparent);
+}
+.carrusel-filas {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(12px, 1.6vw, 24px);
+  width: 200vw;
+  transform: rotate(-25deg);
+}
+.carrusel-fila {
+  display: flex;
+  overflow: hidden;
+}
+.carrusel-pista {
+  display: flex;
+  flex: none;
+  animation: carrusel var(--segundos) linear infinite;
+}
+.carrusel-derecha {
+  animation-direction: reverse;
+}
+.carrusel-pista:hover {
+  animation-play-state: paused;
+}
+.carrusel-tarjeta {
+  flex: none;
+  width: clamp(220px, 24vw, 400px);
+  aspect-ratio: 4 / 3;
+  margin-right: clamp(12px, 1.6vw, 24px);
+  overflow: hidden;
+}
+.carrusel-tarjeta img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+@media (prefers-reduced-motion: reduce) {
+  .carrusel-pista {
+    animation: none;
+  }
+}
+
 .franja-fotos {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr));

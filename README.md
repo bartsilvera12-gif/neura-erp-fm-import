@@ -45,6 +45,8 @@ Varias muestran marcas de terceros (Bentley, Victoria's Secret, Ivy Dubai, Novel
 
 Para agregar una: `cwebp -q 78 -resize 1200 0 original.jpg -o public/fotos/nombre.webp` y pasarla como `src` al componente `Foto`.
 
+La marquesina diagonal del inicio (`src/components/ui/CarruselDiagonal.tsx`) está adaptada de Great UI, licencia MIT.
+
 ### Publicar
 
 - **Vercel** despliega desde `main` (QA).
