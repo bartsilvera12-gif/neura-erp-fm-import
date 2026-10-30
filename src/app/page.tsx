@@ -163,9 +163,16 @@ export default async function Inicio() {
         <FrascoPerfume />
         <div className="frasco-texto">
           <span className="sobretitulo oro">Perfumes</span>
-          <h2 className="serif" style={{ margin: 0, fontSize: 'clamp(40px,5.4vw,88px)', lineHeight: 0.95, letterSpacing: '-.02em' }}>
+          <h2 className="serif" style={{ margin: 0, fontSize: 'clamp(56px,9vw,172px)', lineHeight: 0.92, letterSpacing: '-.025em' }}>
             Una fragancia empieza <em className="oro">en el aire.</em>
           </h2>
+          <p style={{ margin: 0, maxWidth: 460, fontSize: 18, lineHeight: 1.55, color: 'var(--gris-claro)' }}>
+            Perfumes importados para regalar, usar todos los días o sumar a tu negocio.
+          </p>
+          <div className="frasco-acciones">
+            <Link href="/perfumes/" className="btn btn-crema">Ver perfumes</Link>
+            <Link href="/mayoristas/" className="btn btn-borde-oro">Comprar por mayor</Link>
+          </div>
           <span className="capa-rotulo" style={{ letterSpacing: '.1em' }}>Tocá el frasco o desplazate</span>
         </div>
       </section>

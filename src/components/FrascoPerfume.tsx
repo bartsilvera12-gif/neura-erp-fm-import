@@ -5,7 +5,7 @@ import { useEffect, useRef } from 'react';
 
 /**
  * El frasco que rocía al tocarlo o al desplazarse. Es el custom element
- * <perfume-spray> del prototipo, sin cambios, en public/frasco-perfume.js.
+ * <perfume-spray>, basado en el del prototipo, en public/frasco-perfume.js.
  * Se crea a mano porque React no tiene que manejar lo que pasa adentro.
  */
 export function FrascoPerfume() {

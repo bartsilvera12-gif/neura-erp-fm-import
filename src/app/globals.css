@@ -1234,12 +1234,19 @@ button {
   position: absolute;
   left: var(--gutter);
   right: var(--gutter);
-  bottom: clamp(36px, 6vw, 80px);
-  max-width: min(560px, 46vw);
+  top: 50%;
+  transform: translateY(-50%);
+  max-width: min(960px, 58vw);
   pointer-events: none;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: clamp(16px, 2vw, 28px);
+}
+.frasco-acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  pointer-events: auto;
 }
 
 .seleccion {
