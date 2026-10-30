@@ -10,9 +10,12 @@ const REFRESCO_SEGUNDOS = 30;
  * tilda en el producto es lo que se ve acá. Si el ERP no responde, la web sigue
  * con la última copia guardada en el repo en vez de quedar vacía.
  */
-async function catalogo(): Promise<Producto[]> {
+async function catalogo(fresco = false): Promise<Producto[]> {
   try {
-    const r = await fetch(`${SITIO.erpUrl}/api/public/catalogo`, { next: { revalidate: REFRESCO_SEGUNDOS } });
+    const r = await fetch(
+      `${SITIO.erpUrl}/api/public/catalogo`,
+      fresco ? { cache: 'no-store' } : { next: { revalidate: REFRESCO_SEGUNDOS } },
+    );
     const j = await r.json();
     if (r.ok && j?.success && Array.isArray(j.productos)) return j.productos as Producto[];
   } catch {
@@ -27,7 +30,9 @@ export async function listarProductos(categoria?: Categoria): Promise<Producto[]
 }
 
 export async function obtenerProducto(slug: string): Promise<Producto | null> {
-  return (await catalogo()).find((p) => p.slug === slug) ?? null;
+  const guardado = (await catalogo()).find((p) => p.slug === slug);
+  // Un producto recién creado puede no estar en la copia de los últimos segundos.
+  return guardado ?? (await catalogo(true)).find((p) => p.slug === slug) ?? null;
 }
 
 export async function productosRelacionados(p: Producto, cantidad = 4): Promise<Producto[]> {
@@ -38,9 +43,10 @@ export async function productosRelacionados(p: Producto, cantidad = 4): Promise<
 
 /** Lo que se marcó como destacado en el ERP; hasta que haya, una muestra de cada categoría. */
 export async function productosDestacados(cantidad = 4): Promise<Producto[]> {
-  const conFoto = (await catalogo()).filter((p) => p.foto);
-  const marcados = conFoto.filter((p) => p.destacado);
+  const productos = await catalogo();
+  const marcados = productos.filter((p) => p.destacado);
   if (marcados.length) return marcados.slice(0, cantidad);
+  const conFoto = productos.filter((p) => p.foto);
   const perfumes = conFoto.filter((p) => p.categoria === 'Perfumes');
   const cosmetica = conFoto.filter((p) => p.categoria === 'Cosmética');
   return [perfumes[40], cosmetica[0], perfumes[200], cosmetica[1]].filter(Boolean).slice(0, cantidad);
