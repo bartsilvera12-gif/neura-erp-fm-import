@@ -13,6 +13,7 @@ interface Tienda {
   agregar: (slug: string, cantidad: number, nombre: string) => void;
   cambiar: (slug: string, delta: number) => void;
   quitar: (slug: string) => void;
+  vaciar: () => void;
   tiene: (slug: string) => boolean;
   avisar: (texto: string) => void;
 }
@@ -63,6 +64,7 @@ export function ProveedorTienda({ children }: { children: React.ReactNode }) {
           prev.map((l) => (l.slug === slug ? { ...l, cantidad: Math.max(1, l.cantidad + delta) } : l)),
         ),
       quitar: (slug) => actualizar((prev) => prev.filter((l) => l.slug !== slug)),
+      vaciar: () => actualizar(() => []),
       tiene: (slug) => lineas.some((l) => l.slug === slug),
       avisar,
     }),

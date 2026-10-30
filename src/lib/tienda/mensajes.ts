@@ -10,6 +10,10 @@ export function mensajeProducto(p: Producto, cantidad: number) {
   return `Hola FM Importados, quiero consultar por: ${p.nombre}. Precio: ${formatoPrecio(p.precio)}. Cantidad: ${cantidad}. ¿Tienen disponibilidad?`;
 }
 
+export function mensajePedidoEnviado(numero: string) {
+  return `Hola FM Importados, hice el pedido ${numero} en la web.`;
+}
+
 export interface DatosConsulta {
   mayorista: boolean;
   negocio: string;

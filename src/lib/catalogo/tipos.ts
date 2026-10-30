@@ -2,6 +2,7 @@ export type Categoria = 'Perfumes' | 'Cosmética';
 
 export interface Producto {
   slug: string;
+  sku: string;
   categoria: Categoria;
   nombre: string;
   /** Solo si el nombre del producto la trae, como "100 ml". */

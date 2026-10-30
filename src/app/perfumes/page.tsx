@@ -14,8 +14,8 @@ export default async function PaginaPerfumes() {
     <>
       <section className="fondo-negro" data-screen-label="Perfumes · Hero" style={{ position: 'relative', overflow: 'hidden' }}>
         <div className="telon-y" style={{ position: 'relative', height: 'clamp(440px,74vh,760px)' }}>
-          <div className="ph" style={{ position: 'absolute', inset: 0, padding: 'clamp(16px,3vw,40px)', alignItems: 'flex-start', justifyContent: 'flex-end' }}>
-            <span className="ph-texto" style={{ fontSize: 11 }}>Fotografía de fragancias · encuadre horizontal amplio</span>
+          <div className="ph" style={{ position: 'absolute', inset: 0 }}>
+            <img src="/fotos/categoria-perfumes.webp" alt="" className="foto-img" />
           </div>
         </div>
         <div className="aparece" style={{ '--retraso': '.5s', position: 'absolute', left: 0, right: 0, bottom: 0, padding: '0 var(--gutter) clamp(20px,3vw,40px)' } as React.CSSProperties}>

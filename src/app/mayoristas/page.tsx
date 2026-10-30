@@ -11,11 +11,11 @@ export const metadata: Metadata = {
 };
 
 const ESTANTE = [
-  [78, 'Cajas y empaques'],
-  [100, 'Mercadería por volumen'],
-  [64, 'Perfumes en caja'],
-  [88, 'Cosmética'],
-  [72, 'Packaging'],
+  [78, 'Cajas y empaques', '/fotos/mayorista-empaques.webp'],
+  [100, 'Mercadería por volumen', '/fotos/mayorista-volumen.webp'],
+  [64, 'Perfumes en caja', '/fotos/hero-packaging.webp'],
+  [88, 'Cosmética', '/fotos/cosmetica-envases.webp'],
+  [72, 'Packaging', '/fotos/compra-personal.webp'],
 ] as const;
 
 const CONDICIONES = [
@@ -38,9 +38,9 @@ export default async function PaginaMayoristas() {
             Productos para <em className="oro">abastecer</em> tu negocio.
           </h1>
           <div className="estante">
-            {ESTANTE.map(([alto, texto], i) => (
+            {ESTANTE.map(([alto, texto, foto], i) => (
               <div key={texto} className="ph" style={{ height: `${alto}%`, '--retraso': `${(0.1 + i * 0.08).toFixed(2)}s` } as React.CSSProperties}>
-                <span className="ph-texto">{texto}</span>
+                <img src={foto} alt={texto} className="foto-img" />
               </div>
             ))}
           </div>

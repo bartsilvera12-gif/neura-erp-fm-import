@@ -46,6 +46,7 @@ const productos = JSON.parse(salida).map((f) => {
   return {
     // El SKU va en el slug porque hay nombres repetidos.
     slug: aSlug(`${f.nombre} ${f.sku}`),
+    sku: f.sku,
     categoria: CATEGORIAS[f.categoria],
     nombre: f.nombre.trim().replace(/\s+/g, ' '),
     presentacion: ml ? `${ml[1]} ml` : null,

@@ -14,10 +14,8 @@ function activo(ruta: string, href: string) {
   return ruta.startsWith(href.replace(/\/$/, ''));
 }
 
-/** Va en todas las páginas: solo lo que necesita el buscador. */
-export type ProductoBuscable = Pick<Producto, 'slug' | 'nombre' | 'categoria'>;
-
-export function Encabezado({ productos }: { productos: ProductoBuscable[] }) {
+export function Encabezado() {
+  const [productos, setProductos] = useState<Producto[]>([]);
   const ruta = usePathname();
   const { unidades } = useTienda();
   const [scroll, setScroll] = useState(false);
@@ -60,6 +58,15 @@ export function Encabezado({ productos }: { productos: ProductoBuscable[] }) {
     setBuscando(true);
     setTimeout(() => campo.current?.focus(), 50);
   };
+
+  // El catálogo pesa: se trae recién cuando alguien abre el buscador.
+  useEffect(() => {
+    if (!buscando || productos.length) return;
+    fetch('/catalogo.json')
+      .then((r) => r.json())
+      .then(setProductos)
+      .catch(() => {});
+  }, [buscando, productos.length]);
 
   const termino = q.trim().toLowerCase();
   const resultados = termino
@@ -171,7 +178,7 @@ export function Encabezado({ productos }: { productos: ProductoBuscable[] }) {
             <div style={{ display: 'flex', flexDirection: 'column', marginTop: 12 }}>
               {resultados.map((p) => (
                 <Link key={p.slug} href={rutaProducto(p)} className="resultado">
-                  <span className="miniatura" />
+                  <span className="miniatura"><img src={p.foto} alt="" loading="lazy" /></span>
                   <span style={{ display: 'flex', flexDirection: 'column', gap: 4, minWidth: 0 }}>
                     <span className="serif" style={{ fontSize: 21 }}>{p.nombre}</span>
                     <span style={{ fontSize: 12, color: 'var(--gris)' }}>{p.categoria}</span>

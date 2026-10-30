@@ -2,7 +2,6 @@ import type { Metadata, Viewport } from 'next';
 import { Bodoni_Moda, Hanken_Grotesk, IBM_Plex_Mono } from 'next/font/google';
 import { Encabezado } from '@/components/Encabezado';
 import { Pie } from '@/components/Pie';
-import { listarProductos } from '@/lib/catalogo/servicio';
 import { SITIO } from '@/lib/sitio';
 import { ProveedorTienda } from '@/lib/tienda/contexto';
 import './globals.css';
@@ -54,14 +53,13 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
-export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const productos = await listarProductos();
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="es-PY" className={`${bodoni.variable} ${hanken.variable} ${mono.variable}`}>
       <body>
         <ProveedorTienda>
           <div className="sitio">
-            <Encabezado productos={productos.map(({ slug, nombre, categoria }) => ({ slug, nombre, categoria }))} />
+            <Encabezado />
             {children}
             <Pie />
           </div>

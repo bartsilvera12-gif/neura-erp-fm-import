@@ -3,7 +3,7 @@ import { Consultas } from '@/components/Consultas';
 import { listarProductos } from '@/lib/catalogo/servicio';
 
 export const metadata: Metadata = {
-  title: 'Mi lista de consultas',
+  title: 'Tu carrito',
   robots: { index: false },
 };
 

@@ -7,6 +7,8 @@ export const SITIO = {
   descripcion:
     'Perfumes, cosméticos y productos importados en Paraguay. Compra por menor o por mayor para tu negocio.',
   url: process.env.NEXT_PUBLIC_SITE_URL ?? 'https://fmimportpy.com',
+  /** El ERP recibe los pedidos del carrito. */
+  erpUrl: process.env.NEXT_PUBLIC_ERP_URL ?? 'https://fmimportados.neura.com.py',
   /** Internacional sin signos, que es lo que pide wa.me */
   whatsapp: '595992782803',
   whatsappEtiqueta: '+595 992 782 803',
