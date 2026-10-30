@@ -41,13 +41,13 @@ export async function productosRelacionados(p: Producto, cantidad = 4): Promise<
   return Array.from({ length: Math.min(cantidad, misma.length - 1) }, (_, n) => misma[(i + n + 1) % misma.length]);
 }
 
-/** Lo que se marcó como destacado en el ERP; hasta que haya, una muestra de cada categoría. */
+/** Primero lo marcado como destacado en el ERP. */
 export async function productosDestacados(cantidad = 4): Promise<Producto[]> {
   const productos = await catalogo();
   const marcados = productos.filter((p) => p.destacado);
-  if (marcados.length) return marcados.slice(0, cantidad);
-  const conFoto = productos.filter((p) => p.foto);
+  const conFoto = productos.filter((p) => p.foto && !p.destacado);
   const perfumes = conFoto.filter((p) => p.categoria === 'Perfumes');
   const cosmetica = conFoto.filter((p) => p.categoria === 'Cosmética');
-  return [perfumes[40], cosmetica[0], perfumes[200], cosmetica[1]].filter(Boolean).slice(0, cantidad);
+  // Si hay menos marcados que lugares, se completa para que la grilla no quede con huecos.
+  return [...marcados, ...[perfumes[40], cosmetica[0], perfumes[200], cosmetica[1]].filter(Boolean)].slice(0, cantidad);
 }
