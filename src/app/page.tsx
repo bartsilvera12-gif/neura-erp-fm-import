@@ -228,14 +228,9 @@ export default async function Inicio() {
         </div>
       </section>
 
-      <section className="fondo-negro" data-screen-label="Inicio · Mayoristas" style={{ paddingBottom: 'var(--seccion)' }}>
-        <div className="franja-fotos">
-          <Foto texto="Mercadería en caja" src="/fotos/mayorista-empaques.webp" />
-          <Foto texto="Empaques" src="/fotos/hero-packaging.webp" b />
-          <Foto texto="Surtido por volumen" src="/fotos/mayorista-volumen.webp" />
-        </div>
+      <section className="fondo-negro" data-screen-label="Inicio · Mayoristas" style={{ padding: 'var(--seccion) 0' }}>
         <div className="contenedor-angosto" style={{ padding: '0 var(--gutter)', display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(min(100%,440px),1fr))', gap: 'clamp(28px,5vw,80px)', alignItems: 'end' }}>
-          <h2 className="serif" style={{ margin: 'clamp(28px,4vw,56px) 0 0', fontSize: 'clamp(42px,6vw,96px)', lineHeight: 0.95, letterSpacing: '-.02em', textTransform: 'uppercase', textWrap: 'balance' }}>
+          <h2 className="serif" style={{ margin: 0, fontSize: 'clamp(42px,6vw,96px)', lineHeight: 0.95, letterSpacing: '-.02em', textTransform: 'uppercase', textWrap: 'balance' }}>
             Tu negocio también tiene <em className="oro">lugar</em> en FM.
           </h2>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 22, paddingBottom: 8 }}>

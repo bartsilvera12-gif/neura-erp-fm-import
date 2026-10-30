@@ -1741,19 +1741,6 @@ button {
   }
 }
 
-.franja-fotos {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr));
-  gap: 4px;
-  height: clamp(180px, 32vw, 520px);
-}
-.franja-fotos .ph {
-  align-items: flex-start;
-}
-.franja-fotos .ph:first-child .foto-img {
-  object-position: 50% 78%;
-}
-
 .mosaico-cosmetica {
   display: grid;
   grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
