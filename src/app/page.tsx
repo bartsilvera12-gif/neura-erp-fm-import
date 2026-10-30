@@ -271,15 +271,39 @@ export default async function Inicio() {
         </div>
       </section>
 
-      <section className="fondo-marfil" data-screen-label="Inicio · Sobre FM" style={{ padding: 'clamp(72px,10vw,150px) var(--gutter)' }}>
-        <div style={{ maxWidth: 980, margin: '0 auto', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 28, textAlign: 'center' }}>
-          <Link href="/nosotros/" aria-label="Conocer FM Importados">
-            <Logo alt="" tamano={64} />
-          </Link>
-          <p className="serif" style={{ margin: 0, fontSize: 'clamp(26px,3vw,42px)', lineHeight: 1.25, textWrap: 'balance' }}>
-            FM Importados es una tienda dedicada a la comercialización de perfumes, cosméticos y productos importados, con atención tanto a compradores particulares como a clientes mayoristas.
-          </p>
-          <Link href="/nosotros/" className="enlace-linea" style={{ alignSelf: 'center' }}>Conocer FM Importados</Link>
+      <section className="fondo-marfil sobre" data-screen-label="Inicio · Sobre FM">
+        <div className="contenedor sobre-grilla">
+          <div className="sobre-fotos">
+            <Foto texto="Perfume sobre fondo cálido" src="/fotos/hero-perfume.webp" className="sobre-foto-grande" />
+            <Foto texto="Sombras y polvos compactos" src="/fotos/cosmetica-textura.webp" clara className="sobre-foto-chica" />
+            <Link href="/nosotros/" aria-label="Conocer FM Importados" className="sobre-sello">
+              <Logo alt="" tamano={72} />
+            </Link>
+          </div>
+          <div className="sobre-texto">
+            <span className="sobretitulo oro-oscuro">Quiénes somos</span>
+            <h2 className="serif">
+              Importamos lo que te gusta usar <em className="oro-oscuro">y lo que tu negocio necesita vender.</em>
+            </h2>
+            <p>
+              FM Importados es una tienda dedicada a la comercialización de perfumes, cosméticos y productos importados, con atención tanto a compradores particulares como a clientes mayoristas.
+            </p>
+            <nav className="sobre-lista" aria-label="Cómo comprar en FM Importados">
+              {[
+                ['01', 'Por menor', 'Elegí tu próximo favorito.', '/catalogo/'],
+                ['02', 'Por mayor', 'Armá tu lista y pedí cotización.', '/mayoristas/'],
+                ['03', 'Por WhatsApp', 'Hablá directo con nosotros.', '/contacto/'],
+              ].map(([numero, titulo, bajada, href]) => (
+                <Link key={href} href={href}>
+                  <span className="sobre-numero">{numero}</span>
+                  <span className="serif sobre-titulo">{titulo}</span>
+                  <span className="sobre-bajada">{bajada}</span>
+                  <span className="sobre-flecha">→</span>
+                </Link>
+              ))}
+            </nav>
+            <Link href="/nosotros/" className="enlace-linea" style={{ alignSelf: 'flex-start' }}>Conocer FM Importados</Link>
+          </div>
         </div>
       </section>
     </>
