@@ -223,16 +223,6 @@ class PerfumeSpray extends HTMLElement {
     c.strokeStyle = lin(c, L, 0, R, 0, [[0, 'rgba(255,255,255,0)'], [.2, 'rgba(255,255,255,.75)'], [.55, 'rgba(255,255,255,.3)'], [1, 'rgba(255,255,255,0)']]);
     c.beginPath(); c.moveTo(L + rad, T + 1.5); c.lineTo(R - rad, T + 1.5); c.stroke();
 
-    // destellos en las esquinas talladas
-    c.globalCompositeOperation = 'lighter';
-    [[L + bw * .08, T + bw * .05, .9, 0], [R - bw * .06, base - bw * .05, .7, 2]].forEach(([x, y, a, fase]) => {
-      const r = bw * .045 * (.8 + .2 * Math.sin(this.t * 2.2 + fase)); c.globalAlpha = a;
-      c.drawImage(this.sDot, x - r * .4, y - r * .4, r * .8, r * .8);
-      c.fillStyle = 'rgba(255,255,255,.9)'; c.beginPath();
-      c.moveTo(x - r, y); c.quadraticCurveTo(x, y, x, y - r); c.quadraticCurveTo(x, y, x + r, y); c.quadraticCurveTo(x, y, x, y + r); c.quadraticCurveTo(x, y, x - r, y); c.fill();
-    });
-    c.globalAlpha = 1; c.globalCompositeOperation = 'source-over';
-
     // collar
     const cL = bx - colW / 2;
     c.fillStyle = lin(c, cL, 0, cL + colW, 0, [[0, '#2e2312'], [.18, '#8c6c32'], [.36, '#e9d6a2'], [.44, '#fff3d0'], [.55, '#c8a45c'], [.8, '#5e4720'], [1, '#22190b']]);
