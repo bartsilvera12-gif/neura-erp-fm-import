@@ -10,8 +10,8 @@ import { etiquetaAgregar } from './TarjetaProducto';
 import { VerMas } from './VerMas';
 
 export function resumenLista(lineas: number, unidades: number) {
-  if (!lineas) return 'Tu lista está vacía';
-  return `${lineas} ${lineas === 1 ? 'producto' : 'productos'} · ${unidades} unidades en tu lista`;
+  if (!lineas) return 'Tu carrito está vacío';
+  return `${lineas} ${lineas === 1 ? 'producto' : 'productos'} · ${unidades} ${unidades === 1 ? 'unidad' : 'unidades'}`;
 }
 
 export function ListaVolumen({ productos }: { productos: Producto[] }) {

@@ -32,11 +32,6 @@ export default async function PaginaCosmetica() {
       </section>
       <section className="fondo-marfil" data-screen-label="Cosmética · Productos" style={{ padding: '0 var(--gutter) var(--seccion)' }}>
         <div className="contenedor" style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap', borderTop: '1px solid var(--negro)', borderBottom: '1px solid var(--linea-clara)', padding: '16px 0' }}>
-            <span className="rotulo" style={{ marginRight: 8 }}>Subcategorías</span>
-            <span style={{ height: 36, display: 'flex', alignItems: 'center', padding: '0 14px', background: 'var(--negro)', color: 'var(--crema)', fontSize: 13 }}>Toda la cosmética</span>
-            <span style={{ fontSize: 13, color: 'var(--texto-3)' }}>Las subcategorías se incorporan cuando se confirme el catálogo.</span>
-          </div>
           <div className="grilla-productos de-4">
             {cosmetica.map((p) => (
               <TarjetaProducto key={p.slug} producto={p} />

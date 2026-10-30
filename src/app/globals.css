@@ -867,6 +867,7 @@ button {
   height: 40px;
 }
 .tarjeta-pie {
+  margin-top: auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -879,7 +880,7 @@ button {
   background: transparent;
   border: none;
   border-bottom: 1px solid var(--negro);
-  padding: 6px 0;
+  padding: 12px 0;
   font-size: 12px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -1351,8 +1352,14 @@ button {
     grid-row: auto;
     min-height: 220px;
   }
-  .seleccion-item:first-of-type .item-nombre {
-    font-size: 22px;
+  .seleccion-item:first-of-type .item-nombre,
+  .item-nombre {
+    font-size: 18px;
+  }
+  .seleccion-item::after,
+  .descubrir-item::after {
+    inset: 25% 0 0;
+    background: linear-gradient(to bottom, transparent, rgba(12, 11, 9, 0.94) 62%);
   }
   .seleccion-item:nth-of-type(5) {
     display: none;
@@ -1832,6 +1839,19 @@ button {
   }
   .filtros .chips {
     flex-wrap: nowrap;
+  }
+  /* En celular no hay lugar para el orden al costado: va abajo, visible */
+  .filtros {
+    flex-wrap: wrap;
+    overflow-x: visible;
+    gap: 16px;
+  }
+  .filtros > div {
+    flex: 1 1 100%;
+    min-width: 0;
+  }
+  .filtros .select {
+    width: 100%;
   }
   .sticky-escritorio {
     position: static !important;
