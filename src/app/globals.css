@@ -955,7 +955,8 @@ button {
   position: relative;
   display: block;
   flex: none;
-  height: 0.8em;
+  height: 1.1em;
+  margin-block: -0.1em;
   overflow: hidden;
   transition:
     width 0.75s var(--curva-telon),
@@ -968,33 +969,30 @@ button {
   font-style: normal;
   white-space: nowrap;
 }
+/* Casi cuadradas para que entre el producto entero; el margen negativo evita que
+   empujen las líneas del titular */
 .hero-foto.a {
-  width: 24vw;
+  width: 1.2em;
+}
+.hero-foto.a .foto-img {
+  object-position: 50% 54%;
 }
 .hero-foto.b {
-  width: 13vw;
+  width: 1.1em;
 }
 .hero-foto.c {
-  width: 10vw;
-  height: 1.15em;
+  width: 1.9em;
+  height: 1.9em;
+  margin-block: 0;
 }
-.hero:has(.foco-p:hover) .hero-foto.a {
-  width: 32vw;
-}
-.hero:has(.foco-p:hover) .hero-foto.b {
-  width: 8vw;
-  opacity: 0.4;
-}
-.hero:has(.foco-m:hover) .hero-foto.a {
-  width: 13vw;
-  opacity: 0.4;
-}
-.hero:has(.foco-m:hover) .hero-foto.b {
-  width: 26vw;
-}
+.hero:has(.foco-p:hover) .hero-foto.b,
+.hero:has(.foco-m:hover) .hero-foto.a,
 .hero:has(.foco:hover) .hero-foto.c {
-  width: 6vw;
   opacity: 0.5;
+}
+.hero:has(.foco-p:hover) .hero-foto.a,
+.hero:has(.foco-m:hover) .hero-foto.b {
+  width: 1.5em;
 }
 .hero-bajada {
   margin-top: 0.22em;
@@ -1360,8 +1358,8 @@ button {
   right: clamp(80px, 12vw, 200px);
   top: 10px;
   bottom: 10px;
-  width: clamp(140px, 30vw, 460px);
-  padding: 12px;
+  width: clamp(140px, 17vw, 300px);
+  padding: 0;
   clip-path: inset(0 0 0 100%);
   transition: clip-path 0.7s var(--curva-telon);
 }
@@ -1675,10 +1673,13 @@ button {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr));
   gap: 4px;
-  height: clamp(180px, 26vw, 360px);
+  height: clamp(180px, 32vw, 520px);
 }
 .franja-fotos .ph {
   align-items: flex-start;
+}
+.franja-fotos .ph:first-child .foto-img {
+  object-position: 50% 78%;
 }
 
 .mosaico-cosmetica {
