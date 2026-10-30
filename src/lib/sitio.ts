@@ -6,7 +6,7 @@ export const SITIO = {
   nombre: 'FM Importados',
   descripcion:
     'Perfumes, cosméticos y productos importados en Paraguay. Compra por menor o por mayor para tu negocio.',
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? 'https://neura-erp-fm-import.vercel.app',
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? 'https://fmimportpy.com',
   /** Internacional sin signos, que es lo que pide wa.me */
   whatsapp: '595992782803',
   whatsappEtiqueta: '+595 992 782 803',

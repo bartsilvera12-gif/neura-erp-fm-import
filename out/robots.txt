@@ -2,4 +2,4 @@ User-Agent: *
 Allow: /
 Disallow: /consultas/
 
-Sitemap: https://neura-erp-fm-import.vercel.app/sitemap.xml
+Sitemap: https://fmimportpy.com/sitemap.xml

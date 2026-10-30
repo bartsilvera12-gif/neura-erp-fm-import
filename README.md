@@ -49,6 +49,8 @@ La marquesina diagonal del inicio (`src/components/ui/CarruselDiagonal.tsx`) est
 
 ### Publicar
 
+- **Coolify** despliega `fmimportpy.com` desde `main` con el `Dockerfile`: compila y nginx sirve `/out`.
+
 - **Vercel** despliega desde `main` (QA).
 - **Hostinger** despliega desde `master` (producción). Sirve la raíz del repo y el `.htaccess` la mapea a `/out`, así que después de tocar el código hay que correr `npm run build` y commitear `/out`.
 
