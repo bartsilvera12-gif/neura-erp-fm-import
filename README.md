@@ -21,7 +21,7 @@ npm run build    # genera /out
 - `src/lib/catalogo/servicio.ts`: único punto por donde la web lee productos. Hoy devuelve los productos de muestra de `mock.ts`; cuando el catálogo salga del ERP se reimplementa este archivo.
 - `src/lib/tienda/almacenamiento.ts`: única capa que sabe que la lista de consultas vive en `localStorage`.
 - `src/lib/tienda/mensajes.ts`: los textos que la web deja escritos en WhatsApp.
-- `public/frasco-perfume.js`: la animación del frasco, el custom element del prototipo sin cambios.
+- `public/frasco-perfume.js`: la animación del frasco: el custom element del prototipo con el vidrio redibujado para que se vea más cristalino.
 - `prototipo/`: diseño original exportado de Claude Design (`FM Importados.dc.html` es la versión vigente).
 
 ### Fotos

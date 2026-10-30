@@ -147,7 +147,7 @@ class PerfumeSpray extends HTMLElement {
     c.globalCompositeOperation = 'source-over';
 
     // glass body tint
-    c.fillStyle = lin(c, L, 0, R, 0, [[0, 'rgba(255,255,255,.12)'], [.09, 'rgba(255,255,255,.05)'], [.5, 'rgba(255,255,255,.012)'], [.91, 'rgba(255,255,255,.04)'], [1, 'rgba(255,255,255,.1)']]);
+    c.fillStyle = lin(c, L, 0, R, 0, [[0, 'rgba(255,255,255,.04)'], [.09, 'rgba(255,255,255,.012)'], [.5, 'rgba(255,255,255,0)'], [.91, 'rgba(255,255,255,.01)'], [1, 'rgba(255,255,255,.035)']]);
     c.fill(body);
 
     // liquid
@@ -159,11 +159,15 @@ class PerfumeSpray extends HTMLElement {
     const sh = bw * .045;
     c.save(); c.clip(inner);
     c.beginPath(); c.moveTo(iL, iB); for (const [x, y] of pts) c.lineTo(x, y); c.lineTo(iR, iB); c.closePath();
-    c.fillStyle = lin(c, 0, lv, 0, iB, [[0, 'rgba(226,178,98,.66)'], [.6, 'rgba(176,114,44,.8)'], [1, 'rgba(122,72,24,.9)']]); c.fill();
+    c.fillStyle = lin(c, 0, lv, 0, iB, [[0, 'rgba(244,194,104,.5)'], [.55, 'rgba(214,136,46,.62)'], [1, 'rgba(158,84,22,.78)']]); c.fill();
     c.save(); c.clip();
-    c.fillStyle = lin(c, iL, 0, iR, 0, [[0, 'rgba(18,8,0,.6)'], [.16, 'rgba(18,8,0,.12)'], [.3, 'rgba(255,214,140,0)'], [.62, 'rgba(255,214,140,.26)'], [.76, 'rgba(255,214,140,.08)'], [.88, 'rgba(18,8,0,.2)'], [1, 'rgba(18,8,0,.62)']]);
+    c.fillStyle = lin(c, iL, 0, iR, 0, [[0, 'rgba(18,8,0,.72)'], [.07, 'rgba(18,8,0,.16)'], [.18, 'rgba(255,214,140,0)'], [.82, 'rgba(255,214,140,0)'], [.93, 'rgba(18,8,0,.16)'], [1, 'rgba(18,8,0,.72)']]);
     c.fillRect(iL, lv - amp - 2, iR - iL, iB - lv + amp + 4);
-    c.fillStyle = 'rgba(255,226,170,.12)'; c.fillRect(iL + (iR - iL) * .16, lv, Math.max(1, bw * .01), iB - lv);
+    c.globalCompositeOperation = 'lighter';
+    const luz = c.createRadialGradient(bx + bw * .1, iB - (iB - lv) * .3, 0, bx + bw * .1, iB - (iB - lv) * .3, bw * .55);
+    luz.addColorStop(0, 'rgba(255,196,96,.42)'); luz.addColorStop(.5, 'rgba(255,170,70,.14)'); luz.addColorStop(1, 'rgba(255,170,70,0)');
+    c.fillStyle = luz; c.fillRect(iL, lv - amp - 2, iR - iL, iB - lv + amp + 4);
+    c.globalCompositeOperation = 'source-over';
     c.restore();
     c.beginPath(); pts.forEach(([x, y], i) => i ? c.lineTo(x, y) : c.moveTo(x, y));
     for (let i = pts.length - 1; i >= 0; i--) c.lineTo(pts[i][0], pts[i][1] - sh);
@@ -179,34 +183,55 @@ class PerfumeSpray extends HTMLElement {
 
     // dip tube
     const tx = bx + bw * .03;
-    c.fillStyle = 'rgba(255,255,255,.16)'; c.fillRect(tx, T, 1, iB - T - 3);
-    c.fillStyle = 'rgba(0,0,0,.25)'; c.fillRect(tx + 1, lv, 1, iB - lv - 3);
+    c.fillStyle = 'rgba(255,255,255,.07)'; c.fillRect(tx, T, .8, iB - T - 3);
 
-    // thick walls, base, bevels
+    // cristal grueso: paredes oscuras por refracción con filos brillantes finos
     c.save(); c.clip(body);
-    c.fillStyle = lin(c, L, 0, iL, 0, [[0, 'rgba(255,255,255,.26)'], [.25, 'rgba(255,255,255,.07)'], [.75, 'rgba(255,255,255,.04)'], [1, 'rgba(255,255,255,.22)']]);
+    c.fillStyle = lin(c, L, 0, iL, 0, [[0, 'rgba(0,0,0,.5)'], [.1, 'rgba(255,255,255,.55)'], [.2, 'rgba(255,255,255,.04)'], [.72, 'rgba(0,0,0,.28)'], [.95, 'rgba(255,255,255,.34)'], [1, 'rgba(255,255,255,0)']]);
     c.fillRect(L, T, wall, bodyH);
-    c.fillStyle = lin(c, iR, 0, R, 0, [[0, 'rgba(255,255,255,.16)'], [.25, 'rgba(255,255,255,.03)'], [.75, 'rgba(255,255,255,.06)'], [1, 'rgba(255,255,255,.24)']]);
+    c.fillStyle = lin(c, iR, 0, R, 0, [[0, 'rgba(255,255,255,0)'], [.05, 'rgba(255,255,255,.26)'], [.28, 'rgba(0,0,0,.28)'], [.8, 'rgba(255,255,255,.03)'], [.9, 'rgba(255,255,255,.42)'], [1, 'rgba(0,0,0,.5)']]);
     c.fillRect(iR, T, wall, bodyH);
-    c.fillStyle = lin(c, 0, T, 0, iT, [[0, 'rgba(255,255,255,.34)'], [.4, 'rgba(255,255,255,.08)'], [1, 'rgba(255,255,255,.16)']]);
+    c.fillStyle = lin(c, 0, T, 0, iT, [[0, 'rgba(255,255,255,.42)'], [.25, 'rgba(255,255,255,.03)'], [.8, 'rgba(0,0,0,.2)'], [1, 'rgba(255,255,255,.2)']]);
     c.fillRect(L, T, bw, iT - T);
-    c.fillStyle = lin(c, 0, iB, 0, base, [[0, 'rgba(255,255,255,.5)'], [.04, 'rgba(255,255,255,.16)'], [.3, 'rgba(220,170,96,.14)'], [.7, 'rgba(255,255,255,.05)'], [.94, 'rgba(255,255,255,.12)'], [1, 'rgba(255,255,255,.34)']]);
+
+    // base maciza: el líquido se refracta y brilla en el fondo del vidrio
+    c.fillStyle = lin(c, 0, iB, 0, base, [[0, 'rgba(255,238,200,.85)'], [.03, 'rgba(255,200,112,.34)'], [.32, 'rgba(190,116,40,.12)'], [.78, 'rgba(0,0,0,.2)'], [.95, 'rgba(255,255,255,.08)'], [1, 'rgba(255,255,255,.5)']]);
     c.fillRect(L, iB, bw, base - iB);
-    c.fillStyle = lin(c, 0, iB, 0, base, [[0, 'rgba(160,104,40,0)'], [.5, 'rgba(160,104,40,.22)'], [1, 'rgba(160,104,40,0)']]);
-    c.fillRect(iL + bw * .04, iB + 2, iR - iL - bw * .08, base - iB - 4);
-    const spec = lin(c, 0, T, 0, base, [[0, 'rgba(255,255,255,0)'], [.12, 'rgba(255,255,255,.85)'], [.55, 'rgba(255,255,255,.5)'], [.85, 'rgba(255,255,255,.2)'], [1, 'rgba(255,255,255,0)']]);
-    c.fillStyle = spec; c.fillRect(L + bw * .04, T, Math.max(1.5, bw * .008), bodyH);
-    c.globalAlpha = .22; c.fillRect(L + bw * .11, T, bw * .075, bodyH);
-    c.globalAlpha = .65; c.fillRect(R - bw * .032, T + bodyH * .06, 1.2, bodyH * .82);
-    c.globalAlpha = .35; c.fillRect(iL + 1, iT, 1, iB - iT); c.fillRect(iR - 2, iT, 1, iB - iT);
-    c.globalAlpha = 1;
+    c.globalCompositeOperation = 'lighter';
+    const cuna = (x0, x1, x2, a) => {
+      c.fillStyle = lin(c, 0, iB, 0, base, [[0, `rgba(255,210,130,${a})`], [1, 'rgba(255,210,130,0)']]);
+      c.beginPath(); c.moveTo(x0, iB); c.lineTo(x1, iB); c.lineTo(x2, base); c.closePath(); c.fill();
+    };
+    cuna(iL, iL + bw * .2, L + bw * .05, .3); cuna(iR, iR - bw * .2, R - bw * .05, .22); cuna(bx - bw * .1, bx + bw * .12, bx + bw * .02, .16);
+    c.globalCompositeOperation = 'source-over';
+    c.strokeStyle = 'rgba(255,255,255,.22)'; c.lineWidth = .7;
+    c.beginPath(); c.moveTo(iL, iB); c.lineTo(L, base); c.moveTo(iR, iB); c.lineTo(R, base); c.stroke();
+
+    // reflejos finos y afilados, en lugar de bandas anchas
+    const veta = (x, ancho, y0, y1, a) => {
+      c.fillStyle = lin(c, 0, y0, 0, y1, [[0, 'rgba(255,255,255,0)'], [.12, `rgba(255,255,255,${a})`], [.6, `rgba(255,255,255,${a * .55})`], [1, 'rgba(255,255,255,0)']]);
+      c.beginPath(); c.moveTo(x, y0); c.lineTo(x + ancho, y0); c.lineTo(x + ancho * .35, y1); c.lineTo(x, y1); c.closePath(); c.fill();
+    };
+    veta(iL + bw * .05, bw * .022, iT, iB, .75);
+    veta(iL + bw * .09, bw * .006, iT + bodyH * .04, iB - bodyH * .1, .5);
+    veta(iR - bw * .06, bw * .01, iT + bodyH * .1, iB - bodyH * .04, .4);
     c.restore();
 
-    c.strokeStyle = 'rgba(255,255,255,.14)'; c.lineWidth = 1; c.stroke(inner);
-    c.strokeStyle = lin(c, 0, T, 0, base, [[0, 'rgba(255,255,255,.7)'], [.15, 'rgba(255,255,255,.38)'], [.85, 'rgba(255,255,255,.28)'], [1, 'rgba(255,255,255,.55)']]);
-    c.lineWidth = 1.2; c.stroke(body);
+    c.strokeStyle = 'rgba(255,255,255,.1)'; c.lineWidth = .6; c.stroke(inner);
+    c.strokeStyle = lin(c, 0, T, 0, base, [[0, 'rgba(255,255,255,.85)'], [.15, 'rgba(255,255,255,.3)'], [.85, 'rgba(255,255,255,.2)'], [1, 'rgba(255,255,255,.7)']]);
+    c.lineWidth = .8; c.stroke(body);
     c.strokeStyle = lin(c, L, 0, R, 0, [[0, 'rgba(255,255,255,0)'], [.2, 'rgba(255,255,255,.75)'], [.55, 'rgba(255,255,255,.3)'], [1, 'rgba(255,255,255,0)']]);
     c.beginPath(); c.moveTo(L + rad, T + 1.5); c.lineTo(R - rad, T + 1.5); c.stroke();
+
+    // destellos en las esquinas talladas
+    c.globalCompositeOperation = 'lighter';
+    [[L + bw * .08, T + bw * .05, .9, 0], [R - bw * .06, base - bw * .05, .7, 2]].forEach(([x, y, a, fase]) => {
+      const r = bw * .045 * (.8 + .2 * Math.sin(this.t * 2.2 + fase)); c.globalAlpha = a;
+      c.drawImage(this.sDot, x - r * .4, y - r * .4, r * .8, r * .8);
+      c.fillStyle = 'rgba(255,255,255,.9)'; c.beginPath();
+      c.moveTo(x - r, y); c.quadraticCurveTo(x, y, x, y - r); c.quadraticCurveTo(x, y, x + r, y); c.quadraticCurveTo(x, y, x, y + r); c.quadraticCurveTo(x, y, x - r, y); c.fill();
+    });
+    c.globalAlpha = 1; c.globalCompositeOperation = 'source-over';
 
     // collar
     const cL = bx - colW / 2;
