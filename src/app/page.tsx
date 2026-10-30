@@ -156,7 +156,6 @@ export default async function Inicio() {
               <span>Mayoristas →</span>
             </span>
           </Link>
-          <span className="division-barra">/</span>
         </div>
       </section>
 
