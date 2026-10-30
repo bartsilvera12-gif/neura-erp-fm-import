@@ -13,8 +13,9 @@ const REFRESCO_SEGUNDOS = 30;
 async function catalogo(fresco = false): Promise<Producto[]> {
   try {
     const r = await fetch(
-      `${SITIO.erpUrl}/api/public/catalogo`,
-      fresco ? { cache: 'no-store' } : { next: { revalidate: REFRESCO_SEGUNDOS } },
+      // `no-store` tira error en páginas con revalidate: la URL distinta saltea la copia.
+      `${SITIO.erpUrl}/api/public/catalogo${fresco ? `?t=${Date.now()}` : ''}`,
+      { next: { revalidate: REFRESCO_SEGUNDOS } },
     );
     const j = await r.json();
     if (r.ok && j?.success && Array.isArray(j.productos)) return j.productos as Producto[];
