@@ -35,7 +35,7 @@ export default async function PaginaMayoristas() {
             {ACENTO_VERDE && <span className="punto-verde" />}Tu negocio también tiene lugar en FM.
           </span>
           <h1 className="serif" style={{ position: 'relative', zIndex: 2, margin: 0, fontSize: 'clamp(50px,8.4vw,150px)', lineHeight: 0.88, letterSpacing: '-.025em', maxWidth: 1200 }}>
-            Productos para <em className="oro">abastecer</em> tu negocio.
+            Productos para <em className="oro-3d">abastecer</em> tu negocio.
           </h1>
           <div className="estante">
             {ESTANTE.map(([alto, texto, foto], i) => (

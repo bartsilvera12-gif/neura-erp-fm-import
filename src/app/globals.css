@@ -93,6 +93,18 @@ button {
 .oro-oscuro {
   color: var(--oro-oscuro);
 }
+/* Relieve: capas de dorado oscuro hacia abajo y a la derecha, más una sombra */
+.oro-3d {
+  color: #e6c477;
+  text-shadow:
+    0.008em 0.008em 0 #c9a24f,
+    0.016em 0.016em 0 #b48d3f,
+    0.024em 0.024em 0 #9c7730,
+    0.032em 0.032em 0 #856424,
+    0.04em 0.04em 0 #6e511a,
+    0.05em 0.055em 0 #574012,
+    0.09em 0.11em 0.14em rgba(0, 0, 0, 0.75);
+}
 .fondo-negro {
   background: var(--negro);
   color: var(--crema);
@@ -1955,7 +1967,7 @@ button {
   grid-template-columns: repeat(5, minmax(0, 1fr));
   align-items: end;
   gap: 4px;
-  margin-top: clamp(-40px, -3vw, -16px);
+  margin-top: clamp(20px, 3vw, 44px);
   height: clamp(220px, 30vw, 420px);
 }
 .estante > div {

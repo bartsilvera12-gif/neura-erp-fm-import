@@ -16,9 +16,8 @@ export const SITIO = {
   correo: 'fmimportados2026@gmail.com',
   direccion: '',
   horarios: '',
-  /** La cuenta todavía no existe: hay que crearla con el cliente. */
-  instagram: '',
-  instagramUsuario: '',
+  instagram: 'https://www.instagram.com/fm_importadospy',
+  instagramUsuario: '@fm_importadospy',
   facebook: '',
 } as const;
 
